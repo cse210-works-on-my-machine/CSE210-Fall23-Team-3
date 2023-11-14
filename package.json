@@ -1,0 +1,10 @@
+{
+  "name": "cse210-fall23-team-3",
+  "version": "1.0.0",
+  "description": "cse210 final project for team 3",
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "",
+  "license": "ISC"
+}
