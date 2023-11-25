@@ -55,6 +55,7 @@ async function displayPostsNew() {
             const p = Post.fromJSON(post);
             const postDiv = p.getDisplayDiv();
             section.appendChild(postDiv);
+            section.appendChild(document.createElement('hr'));
         });
         container.appendChild(section);
     });
