@@ -7,7 +7,7 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "eslint": "^8.54.0"
   }
 }
