@@ -1,5 +1,7 @@
 GET https://mastodon.social/api/v1/trends/tags HTTP/1.1
 content-type: application/json
 
+###
+
 GET https://mastodon.social/api/v1/timelines/tag/:Fensterfreitag HTTP/1.1
 content-type: application/json
