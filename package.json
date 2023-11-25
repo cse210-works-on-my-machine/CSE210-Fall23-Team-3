@@ -6,5 +6,11 @@
     "test": "node --test"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.54.0"
+  },
+  "dependencies": {
+    "@stylistic/eslint-plugin": "^1.4.1"
+  }
 }
