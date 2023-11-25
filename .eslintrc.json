@@ -4,12 +4,15 @@
         "commonjs": true,
         "es2021": true
     },
-    "extends": "eslint:recommended",
+    "extends": [ "plugin:@stylistic/recommended-extends", "eslint:recommended" ],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
+    "plugins": [
+        "@stylistic/eslint-plugin"
+    ],
     "rules": {
-        "indent": [
+        "@stylistic/indent": [
             "error",
             4
         ],
@@ -17,13 +20,26 @@
             "error",
             "windows"
         ],
-        "quotes": [
+        "@stylistic/quotes": [
             "error",
             "double"
         ],
-        "semi": [
+        "@stylistic/semi": [
             "error",
             "always"
+        ],
+        "no-var": [
+            "error"
+        ],
+        "@stylistic/arrow-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "@stylistic/block-spacing":  [
+            "error"
         ]
     }
 }
