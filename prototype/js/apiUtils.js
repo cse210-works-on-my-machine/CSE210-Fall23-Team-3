@@ -2,8 +2,7 @@
  *
  * @returns {Promise<Array>} - A promise that resolves to an array of trending tags
  */
-export async function fetchTrendingTags() {
-  const endpoint = "https://mastodon.social/api/v1/trends/tags";
+export async function fetchTrendingTags(endpoint) {
   try {
     const response = await fetch(endpoint);
     if (!response.ok) {
@@ -21,8 +20,8 @@ export async function fetchTrendingTags() {
  * @param {string} hashtag - The hashtag to fetch posts for
  * @returns
  */
-export async function fetchPostsByHashtag(hashtag) {
-  const endpoint = `https://mastodon.social/api/v1/timelines/tag/:${hashtag}`;
+export async function fetchPostsByHashtag(prefix, hashtag) {
+  const endpoint  = prefix + hashtag;
   try {
     const response = await fetch(endpoint);
     if (!response.ok) {
