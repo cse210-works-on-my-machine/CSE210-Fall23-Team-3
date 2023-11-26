@@ -1,6 +1,4 @@
- 
-
-export class Post {
+ export class Post {
     
     constructor(id, content, authorName, createdAt, authorImage) {
         this.id = id;
@@ -15,7 +13,6 @@ export class Post {
     }
 
     getDisplayDiv() {
-
         const postDiv = document.createElement('div');
         postDiv.className = 'post';
 
