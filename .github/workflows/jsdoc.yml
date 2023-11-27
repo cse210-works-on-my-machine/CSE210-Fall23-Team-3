@@ -12,6 +12,9 @@ jobs:
   documentation:
     runs-on: ubuntu-latest
 
+    permissions:
+        contents: write
+
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
@@ -33,8 +36,6 @@ jobs:
 
     - name: Deploy Documentation to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      permissions:
-        contents: write
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs  
