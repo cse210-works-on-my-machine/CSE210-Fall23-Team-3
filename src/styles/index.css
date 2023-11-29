@@ -1,0 +1,61 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+header {
+    border: whitesmoke outset;
+    background-color:lightgrey;
+    padding:15px;
+    display: flex;
+    align-items: center;
+}
+
+header button {
+    /* border: none; leave this commented for windows 95 */
+    background: none;
+    width: max-content;
+    height: max-content;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.flex-spacer {
+    flex-grow: 1;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-container {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: max-content max-content max-content;
+}
+
+.post-header {
+    display: flex;
+    align-items: center
+}
+
+.post-content {
+    grid-column: span 2;
+    
+}
+
+.page-button {
+    background: none;
+    width: max-content;
+    height: max-content;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

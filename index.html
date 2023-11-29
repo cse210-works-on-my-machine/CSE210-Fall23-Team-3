@@ -3,10 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="src/styles/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <title>Blend | What's happening across the Fediverse</title>
 </head>
 <body>
-    
+    <header>
+        <h1>B L E N D</h1>
+        <button>
+            <img src="media/dropdown.svg" style="width: 36px; height: 36px;"></img>
+        </button>
+        <button>
+            <img src="media/refresh.svg" style="width: 36px; height: 36px;"></img>
+        </button>
+        <div class="flex-spacer"></div>
+        <button>
+            <img src="media/settings.svg" style="width: 36px; height: 36px;"></img>
+        </button>
+    </header>
+    <main>
+        <div class="post-container">
+            <picture>
+                <img src="https://cse.ucsd.edu/sites/default/files/faculty/powellF17-115x150.jpg"></img>
+            </picture>
+            <h2 class="post-header">Thomas A. Powell</h2>
+            <time>10:00</time> <span>thomaspowell@fosstodon.org</span>
+            <p class="post-content">React sucks. It completely ruins your response time. I mean come on guys. It's bonkers. What are we even doing here?</p>
+        </div>
+
+        <div class="post-container">
+            <picture>
+                <img src="https://cse.ucsd.edu/sites/default/files/faculty/powellF17-115x150.jpg"></img>
+            </picture>
+            <h2 class="post-header">Username</h2>
+            <time>10:00</time> <span>Handle</span>
+            <p class="post-content">Post Content</p>
+        </div>
+    </main>
+    <footer>
+        <button class="page-button">
+            <img src="media/previous-page.svg" style="width: 24px; height: 24px;"></img>
+        </button>
+        <span>Page 2</span>
+        <button class="page-button">
+            <img src="media/next-page.svg" style="width: 24px; height: 24px;"></img>
+        </button>
+    </footer>
 </body>
 </html>
 
