@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "description": "cse210 final project for team 3",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "generate-docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.54.0",
+    "jsdoc": "^4.0.2"
+  },
+  "dependencies": {
+    "@stylistic/eslint-plugin": "^1.4.1"
+  }
 }

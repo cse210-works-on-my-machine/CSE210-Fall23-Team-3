@@ -1,0 +1,27 @@
+{
+    "source": {
+      "include": ["src"],
+      "exclude": ["node_modules"],
+      "includePattern": ".+\\.js(doc|x)?$",
+      "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": [
+      "plugins/markdown"
+    ],
+    "templates": {
+      "cleverLinks": false,
+      "monospaceLinks": false,
+      "default": {
+        "outputSourceFiles": true
+      },
+      "systemName": "CSE 210 Project Documentation",
+      "footer": "Copyright 2023 Works On My Machine",
+      "includeDate": true
+    },
+    "opts": {
+      "encoding": "utf8",
+      "destination": "docs/",
+      "recurse": true,
+      "verbose": true
+    }
+  }

@@ -1,0 +1,45 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [ "plugin:@stylistic/recommended-extends", "eslint:recommended" ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "plugins": [
+        "@stylistic/eslint-plugin"
+    ],
+    "rules": {
+        "@stylistic/indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "@stylistic/quotes": [
+            "error",
+            "double"
+        ],
+        "@stylistic/semi": [
+            "error",
+            "always"
+        ],
+        "no-var": [
+            "error"
+        ],
+        "@stylistic/arrow-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "@stylistic/block-spacing":  [
+            "error"
+        ]
+    }
+}
