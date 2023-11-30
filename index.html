@@ -3,9 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="src/styles/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <title>Blend | What's happening across the Fediverse</title>
 </head>
 <body>
+    <header>
+        <h1>B L E N D</h1>
+        <button>
+            <img src="media/dropdown.svg" style="width: 36px; height: 36px;"></img>
+        </button>
+        <button>
+            <img src="media/refresh.svg" style="width: 36px; height: 36px;"></img>
+        </button>
+        <div class="flex-spacer"></div>
+        <button>
+            <img src="media/settings.svg" style="width: 36px; height: 36px;"></img>
+        </button>
+    </header>
+
+    <main id="featuredTagsPosts">
+        <fedi-post author-image-url="https://cse.ucsd.edu/sites/default/files/faculty/powellF17-115x150.jpg"
+            author-name="Thomas A. Powell" 
+            author-handle="thomasapowell@fosstodon.org"
+            content="React sucks. It completely ruins your response time. I mean come on guys. It's bonkers. What are we even doing here?"
+            created-at="2023-11-30T10:00:00Z"></fedi-post>
+    </main>
+
+    <script type="module" src="src/scripts/index.js"></script>
+    <footer>
+        <button class="page-button">
+            <img src="media/previous-page.svg" style="width: 24px; height: 24px;"></img>
+        </button>
+        <span class="page-label">Page 2</span>
+        <button class="page-button">
+            <img src="media/next-page.svg" style="width: 24px; height: 24px;"></img>
+        </button>
+    </footer>
     
 </body>
 </html>
