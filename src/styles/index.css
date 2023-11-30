@@ -4,7 +4,7 @@ body {
 header {
     border: whitesmoke outset;
     background-color:lightgrey;
-    padding:15px;
+    padding: 5px 20px 5px 20px;
     display: flex;
     align-items: center;
 }
@@ -15,8 +15,8 @@ header button {
     width: max-content;
     height: max-content;
     padding: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .flex-spacer {
@@ -33,27 +33,6 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.post-container {
-    width: 80%;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: max-content max-content max-content;
-}
-
-.post-header {
-    display: flex;
-    align-items: center
-}
-
-.post-container picture {
-    width: max-content;
-}
-
-.post-content {
-    grid-column: span 2;
-    
 }
 
 .page-button {

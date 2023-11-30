@@ -23,25 +23,16 @@
             <img src="media/settings.svg" style="width: 36px; height: 36px;"></img>
         </button>
     </header>
-    <main>
-        <div class="post-container">
-            <picture>
-                <img src="https://cse.ucsd.edu/sites/default/files/faculty/powellF17-115x150.jpg"></img>
-            </picture>
-            <h2 class="post-header">Thomas A. Powell</h2>
-            <time>10:00</time> <span>thomaspowell@fosstodon.org</span>
-            <p class="post-content">React sucks. It completely ruins your response time. I mean come on guys. It's bonkers. What are we even doing here?</p>
-        </div>
 
-        <div class="post-container">
-            <picture>
-                <img src="https://cse.ucsd.edu/sites/default/files/faculty/powellF17-115x150.jpg"></img>
-            </picture>
-            <h2 class="post-header">Username</h2>
-            <time>10:00</time> <span>Handle</span>
-            <p class="post-content">Post Content</p>
-        </div>
+    <main id="featuredTagsPosts">
+        <fedi-post author-image-url="https://cse.ucsd.edu/sites/default/files/faculty/powellF17-115x150.jpg"
+            author-name="Thomas A. Powell" 
+            author-handle="thomasapowell@fosstodon.org"
+            content="React sucks. It completely ruins your response time. I mean come on guys. It's bonkers. What are we even doing here?"
+            created-at="2023-11-30T10:00:00Z"></fedi-post>
     </main>
+
+    <script type="module" src="src/scripts/index.js"></script>
     <footer>
         <button class="page-button">
             <img src="media/previous-page.svg" style="width: 24px; height: 24px;"></img>
@@ -51,6 +42,7 @@
             <img src="media/next-page.svg" style="width: 24px; height: 24px;"></img>
         </button>
     </footer>
+    
 </body>
 </html>
 
