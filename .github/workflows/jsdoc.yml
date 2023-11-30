@@ -4,39 +4,36 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main  
 
 jobs:
   documentation:
     runs-on: ubuntu-latest
 
     permissions:
-        contents: write
+      contents: write
 
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-    - name: Generate JSDoc Documentation
-      run: npm run generate-docs  
+      - name: Generate JSDoc Documentation
+        run: npm run generate-docs
 
-    - name: Deploy Documentation to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs  
-        force_orphan: true
+      - name: Deploy Documentation to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          force_orphan: true
