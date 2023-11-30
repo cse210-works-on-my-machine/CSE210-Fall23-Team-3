@@ -36,8 +36,10 @@ footer {
 }
 
 .post-container {
+    width: 80%;
     display: grid;
-    grid-template-columns: max-content max-content;
+    float: center;
+    grid-template-columns: auto 1fr;
     grid-template-rows: max-content max-content max-content;
 }
 
@@ -46,13 +48,17 @@ footer {
     align-items: center
 }
 
+.post-container picture {
+    width: max-content;
+}
+
 .post-content {
     grid-column: span 2;
     
 }
 
 .page-button {
-    background: none;
+    background: lightgray;
     width: max-content;
     height: max-content;
     padding: 10px;
