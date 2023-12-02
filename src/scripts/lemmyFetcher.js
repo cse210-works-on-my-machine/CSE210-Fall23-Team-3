@@ -1,8 +1,7 @@
 /**
  * Gets trending posts from lemmy
  */
-export async function getTrendingPosts(){
-    const endpoint = 'https://lemmy.ml/api/v3/post/list?sort=Hot'
+export async function getTrendingPostsLemmy(endpoint){
     try {
         const response = await fetch(endpoint);
         if (!response.ok) {
