@@ -18,7 +18,7 @@ export async function fetchTrendingTags(endpoint) {
 /**
  *
  * @param {string} hashtag - The hashtag to fetch posts for
- * @returns
+ * @returns {null} - TODO: fix this!
  */
 export async function fetchPostsByHashtag(prefix, hashtag) {
   const endpoint  = prefix + hashtag;
