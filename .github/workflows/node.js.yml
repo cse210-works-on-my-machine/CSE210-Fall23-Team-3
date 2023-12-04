@@ -4,10 +4,8 @@
 name: Node.js Test Runner
 
 on:
-  workflow_run:
-    workflows: [documentation]
-    types:
-      - completed
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   test:
