@@ -24,6 +24,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 2
       
       - name: Check changed files
         id: changed-files-yaml
