@@ -4,11 +4,12 @@ on:
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   documentation:
     runs-on: ubuntu-latest
-    if: github.actor != 'actions-user'
 
     permissions:
       contents: write
