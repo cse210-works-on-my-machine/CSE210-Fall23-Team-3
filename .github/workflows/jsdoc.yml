@@ -1,9 +1,11 @@
 name: Generate and Deploy JSDoc
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   documentation:
@@ -14,26 +16,51 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x]
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 2
+      
+      - name: Check changed files
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v40
+        with:
+          since_last_remote_commit: true
+          files_yaml: |
+            nondoc:
+              - '!docs/**'
 
       - name: Set up Node.js
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
         run: npm install
 
       - name: Generate JSDoc Documentation
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
         run: npm run generate-docs
 
-      - name: Deploy Documentation to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          force_orphan: true
+      - name: Commit Documentation
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Actions"
+          git add docs
+          git commit -m "Generated documentation"
+
+      - name: Push Documentation
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
+        uses: ad-m/github-push-action@master
+        with: 
+          github_token: ${{ secrets.PAT }}
+          branch: ${{ github.event.pull_request.head.ref }}
+
