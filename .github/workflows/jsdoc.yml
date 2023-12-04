@@ -30,6 +30,7 @@ jobs:
         id: changed-files-yaml
         uses: tj-actions/changed-files@v40
         with:
+          since_last_remote_commit: true
           files_yaml: |
             nondoc:
               - '!docs/**'
