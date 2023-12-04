@@ -24,19 +24,31 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.head.ref }}
+      
+      - name: Check changed files
+        id: changed-files-yaml
+        uses: tj-actions/changed-files@v40
+        with:
+          files_yaml: |
+            nondoc:
+              - '!docs/**'
 
       - name: Set up Node.js
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
         run: npm install
 
       - name: Generate JSDoc Documentation
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
         run: npm run generate-docs
 
       - name: Commit Documentation
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Actions"
@@ -44,6 +56,7 @@ jobs:
           git commit -m "Generated documentation"
 
       - name: Push Documentation
+        if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
         uses: ad-m/github-push-action@master
         with: 
           github_token: ${{ secrets.PAT }}
