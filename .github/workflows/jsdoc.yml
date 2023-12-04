@@ -1,9 +1,6 @@
 name: Generate and Deploy JSDoc
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -11,6 +8,7 @@ on:
 jobs:
   documentation:
     runs-on: ubuntu-latest
+    if: github.actor != 'actions-user'
 
     permissions:
       contents: write
