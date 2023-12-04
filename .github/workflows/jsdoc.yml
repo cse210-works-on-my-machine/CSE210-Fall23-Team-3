@@ -35,8 +35,7 @@ jobs:
         run: npm run generate-docs
 
       - name: Commit Documentation
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: 'docs'
-          message: 'Generate documentation'
-          
+        run: |
+          git add docs
+          git push
+
