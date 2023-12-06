@@ -1,9 +1,29 @@
 export class MastodonDisplay {
 
     displayPosts(container, posts){
-        for (const post of posts) {
-            container.appendChild(this.#processPost(post));
+        for (const postsByTag of posts) {
+            container.appendChild(this.#processPost(postsByTag[0]))
         }
+
+        let results = this.#interleaveArrays(posts);
+        results.forEach(json_post => {
+            container.appendChild(this.#processPost(json_post));
+        });
+    }
+
+    #interleaveArrays(responses) {
+        const maxLength = Math.max(...responses.map(response => response.length));
+        const result = [];
+      
+        for (let i = 0; i < maxLength; i++) {
+          for (let j = 0; j < responses.length; j++) {
+            if (responses[j].length > i) {
+              result.push(responses[j][i]);
+            }
+          }
+        }
+      
+        return result;
     }
 
     /**

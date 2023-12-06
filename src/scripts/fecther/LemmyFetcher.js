@@ -1,4 +1,4 @@
-import * as constant from "../consts.js";
+import * as constant from "../entity/Constant.js"
 
 export class LemmyFetcher {
     /**
