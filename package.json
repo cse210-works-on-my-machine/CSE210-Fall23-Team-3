@@ -13,6 +13,10 @@
     "jsdoc": "^4.0.2"
   },
   "dependencies": {
-    "@stylistic/eslint-plugin": "^1.4.1"
-  }
+    "@stylistic/eslint-plugin": "^1.4.1",
+    "jsdom": "^23.0.1",
+    "node-fetch": "^3.3.2",
+    "sinon": "^17.0.1"
+  },
+  "type": "module"
 }
