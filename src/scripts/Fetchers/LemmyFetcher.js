@@ -17,7 +17,6 @@ export class LemmyFetcher extends Fetcher {
             let response_data = await response.json();
             let posts = []
             const posts_json = response_data.posts
-            console.log("Length: ", posts_json.length)
             posts_json.forEach(post => {
                 posts.push(this.#createPost(post))
             });
@@ -36,12 +35,41 @@ export class LemmyFetcher extends Fetcher {
     #createPost(post) {
         let newPost = document.createElement("fedi-post");
         newPost.setAttribute('id', post.post.id);
-        newPost.setAttribute('content', post.post.body); // Either a url or body or both. 
+        newPost.setAttribute('content', this.#extractPostContent(post.post)); // Either a url or body or both. 
         newPost.setAttribute('author-name', post.creator.name);
-        //TODO : handle display names 
         newPost.setAttribute('created-at', post.post.published);
         newPost.setAttribute('author-image-url', post.creator.avatar);
-        newPost.setAttribute('author-handle', post.creator.matrix_user_id);
+        newPost.setAttribute('author-handle', this.#extractAuthorHandle(post));
         return newPost;
+    }
+
+    /**
+     * 
+     * @param {Object} post - Json object from the API
+     * @returns {string} - The content of the post
+     */
+    #extractPostContent(post) {
+        let content = "";
+        if ("body" in post) {
+            content = content.concat(post.body);
+        }
+        if ("url" in post) {
+            content = content.concat("\nURL: ", post.url);
+        }
+        return content;    
+    }
+
+    /**
+     * 
+     * @param {Object} post - Json object from the API
+     * @returns {string} - The author's handle or an empty string if not found 
+     */
+    #extractAuthorHandle(post) {
+        if ("creator" in post) {
+            if ("matrix_user_id" in post.creator) {
+                return post.creator.matrix_user_id;
+            }
+        }
+        return "";
     }
 }

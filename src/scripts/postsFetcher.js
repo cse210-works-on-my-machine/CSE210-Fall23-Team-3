@@ -1,5 +1,5 @@
-import {LemmyFetcher} from "./lemmyFetcher.js";
-import {MastodonFetcher} from "./mastodonFetcher.js";
+import {LemmyFetcher} from "./Fetchers/LemmyFetcher.js";
+import {MastodonFetcher} from "./Fetchers/MastodonFetcher.js";
 
 
 /**
