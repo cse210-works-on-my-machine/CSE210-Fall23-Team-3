@@ -1,6 +1,5 @@
 import "../scripts/Post.js"; // Import the custom element
-import * as mastodonFetcher from "../scripts/mastodonFetcher.js";
-import * as lemmyFetcher from "../scripts/lemmyFetcher.js";
+import {PostFetcher} from "./postsFetcher.js"
 
 document.addEventListener("DOMContentLoaded", function () {
     displayPostsNew();
@@ -12,18 +11,12 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 async function displayPostsNew() {
     const container = document.getElementById("featuredTagsPosts");
+    const postFetcher = new PostFetcher();
+    const posts = await postFetcher.fetchPosts();
     
-    const mastodonPosts = await mastodonFetcher.fetchTrendingPosts();    
-    mastodonPosts.forEach((post) => {
+    // Display posts
+    posts.forEach(post => {
         container.appendChild(post);
     });
 
-    const lemmyPosts = await lemmyFetcher.getTrendingPosts();
-    console.log("Hello: ", lemmyPosts);
-    lemmyPosts.forEach((post) => {
-        console.log("Post, ", post);
-        container.appendChild(post);
-    });
 }
-
-// this should go in some factory class
