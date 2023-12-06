@@ -6,7 +6,8 @@ export class LemmyFetcher extends Fetcher {
 
     /**
      * 
-     * @returns {Promise<Array>} - A promise that resolves to an array of Post elements
+     * Fetches trending posts from Lemmy API and displays them using custom fedi-post HTML element
+     * Webpage container is directly updated to reduce response time
      */
     async fetchPosts() {
         try {

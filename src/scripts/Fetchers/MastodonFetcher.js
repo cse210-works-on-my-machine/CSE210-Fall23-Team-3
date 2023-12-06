@@ -20,8 +20,8 @@ function interleaveArrays(responses) {
 export class MastodonFetcher extends Fetcher {
   
   /**
-   * 
-   * @returns {Promise<Array>} - A promise that resolves to an array of Post elements
+   * Fetches trending tags and displays posts for each tag in an interleaved manner
+   * Webpage container is directly updated to reduce response time
    */
   async fetchPosts() {
     const hashtags = await this.#fetchTrendingTagsMastodon(MASTODON_SOCIAL_TRENDING_TAGS);
