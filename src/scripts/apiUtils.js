@@ -18,7 +18,7 @@ export async function fetchTrendingTags(endpoint) {
 /**
  *
  * @param {string} hashtag - The hashtag to fetch posts for
- * @returns {null} - TODO: fix this!
+ * @returns {Promise<Object>} - A promise that resolves to a json object containing posts
  */
 export async function fetchPostsByHashtag(prefix, hashtag) {
   const endpoint  = prefix + hashtag;
