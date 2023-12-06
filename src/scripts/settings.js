@@ -6,6 +6,31 @@ const DEFAULT_LISTS = {
 const INST_LISTS = 'instanceLists';
 
 /**
+ * Loads hardcoded default instance lists into localStorage.
+ */
+function setDefaultLists() {
+    saveLists(DEFAULT_LISTS);
+}
+
+/**
+ * Fetches current instance lists from localStorage. If there aren't any in localStorage,
+ * sets them to the hardcoded defaults before returning them.
+ * @returns The current set of instance lists, as an object of arrays indexed by network name.
+ */
+function fetchInstanceLists() {
+    if (!(INST_LISTS in localStorage)) {
+        setDefaultLists();
+        return DEFAULT_LISTS;
+    }
+    return JSON.parse(localStorage.getItem(INST_LISTS));
+}
+
+function saveLists(instanceLists) {
+    localStorage.setItem(INST_LISTS, JSON.stringify(instanceLists))
+}
+
+
+/**
  * Wrapper function for local storage object conversion.
  * @precondition obj_str must either be a valid JSON string or null.
  * This shouldn't be a problem unless local storage is corrupted.
@@ -21,15 +46,16 @@ function to_obj(obj_str) {
  * @param {*} url The URL of the instance to add.
  */
 function addInstance(network, url) {
+    
     // TODO: move call out of this function? (may separate concerns better)
     if (!validInstance(network, url)) {
         return;
     }
-    let instanceList = to_obj(localStorage.getItem(INST_LISTS));
+    let instanceList = fetchInstanceLists();
     if (network in instanceList) {
         instanceList[network].push(url);
     } else {
-        instanceList[network] = [...DEFAULT_LISTS[network]].append(url);
+        instanceList[network] = [url];
     }
     localStorage.setItem(INST_LISTS, JSON.stringify(instanceList));
 }
@@ -40,7 +66,10 @@ function addInstance(network, url) {
  * @param {*} url 
  */
 function removeInstance(network, url) {
-
+    let instanceLists = fetchInstanceLists();
+    if (network in instanceLists && url in instanceLists[network]) {
+        delete instanceLists[network][instanceLists[network].indexOf(url)];
+    }
 }
 
 // TODO: how tf is this async gonna work
@@ -56,14 +85,6 @@ async function validInstance(network, url) {
         const response = await fetch(`${url}/api/v2/instance`);
         return response.status === 200;
     }
-}
-
-/**
- * 
- * @param {string} network 
- */
-function resetInstanceList(network) {
-    
 }
 
 // useful for fetching stuff/algorithm, read from local storage
