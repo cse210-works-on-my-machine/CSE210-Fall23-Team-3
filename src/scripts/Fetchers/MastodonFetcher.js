@@ -1,6 +1,22 @@
 import {Fetcher} from "./Fetcher.js";
 import {MASTODON_SOCIAL_TRENDING_POST_PER_TAG, MASTODON_SOCIAL_TRENDING_TAGS} from "../consts.js";
 
+function interleaveArrays(responses) {
+  const maxLength = Math.max(...responses.map(response => response.length));
+  const result = [];
+
+  for (let i = 0; i < maxLength; i++) {
+    for (let j = 0; j < responses.length; j++) {
+      if (responses[j].length > i) {
+        result.push(responses[j][i]);
+      }
+    }
+  }
+
+  return result;
+}
+
+
 export class MastodonFetcher extends Fetcher {
   
   /**
@@ -10,17 +26,18 @@ export class MastodonFetcher extends Fetcher {
   async fetchPosts() {
     const hashtags = await this.#fetchTrendingTagsMastodon(MASTODON_SOCIAL_TRENDING_TAGS);
     let json_posts = [];
+    let responses = [];
     for (const tag of hashtags) {
       let response = await this.#fetchPostsByHashtagMastodon(tag.name);
-      for (let i = 0; i < response.length; i++) {
-        json_posts.push(response[i]);
-      }
+      responses.push(response);
+      this.container.appendChild(this.#createNewMastodonPost(response[0]))  // Add atleast one response now only before loading all the jsons
     }
-    let posts = [];
-    json_posts.forEach(post => {
-      posts.push(this.#createNewMastodonPost(post));
+
+    let results = interleaveArrays(responses);
+
+    results.forEach(json_post => {
+      this.container.appendChild(this.#createNewMastodonPost(json_post));
     });
-    return posts;
   }
 
   /**

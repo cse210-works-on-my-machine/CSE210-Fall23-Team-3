@@ -11,12 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 async function displayPostsNew() {
     const container = document.getElementById("featuredTagsPosts");
-    const postFetcher = new PostFetcher();
-    const posts = await postFetcher.fetchPosts();
-    
-    // Display posts
-    posts.forEach(post => {
-        container.appendChild(post);
-    });
-
+    const postFetcher = new PostFetcher(container);
+    await postFetcher.fetchPosts();
 }
