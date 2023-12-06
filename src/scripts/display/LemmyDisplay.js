@@ -1,28 +1,9 @@
-import { Fetcher } from "./Fetcher.js";
-import { LEMMY_TRENDING_POSTS } from "../consts.js";
+export class LemmyDisplay {
 
-
-export class LemmyFetcher extends Fetcher {
-
-    /**
-     * 
-     * @returns {Promise<Array>} - A promise that resolves to an array of Post elements
-     */
-    async fetchPosts() {
-        try {
-            const response = await fetch(LEMMY_TRENDING_POSTS);
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
-            }
-            let response_data = await response.json();
-            const posts_json = response_data.posts
-            posts_json.forEach(post => {
-                this.container.appendChild(this.#createPost(post))
-            });
-        } catch (error) {
-            console.error(`Failed to fetch trending posts:`, error);
-            return null;
-        }
+    displayPosts(container, posts) {
+        posts.forEach(post => {
+            container.appendChild(this.#processPost(post))
+        });
     }
 
     /**
@@ -30,7 +11,7 @@ export class LemmyFetcher extends Fetcher {
      * @param {Object} post - raw post object from the API
      * @returns - A Post element created from raw json data from the API
      */
-    #createPost(post) {
+    #processPost(post) {
         let newPost = document.createElement("fedi-post");
         newPost.setAttribute('id', post.post.id);
         newPost.setAttribute('content', this.#extractPostContent(post.post)); // Either a url or body or both. 
