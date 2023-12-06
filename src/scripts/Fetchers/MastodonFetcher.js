@@ -1,7 +1,5 @@
-const mastodonTagsURL = "https://mastodon.social/api/v1/trends/tags";
-const postPrefix = "https://mastodon.social/api/v1/timelines/tag/:";
-
 import {Fetcher} from "./Fetcher.js";
+import {MASTODON_SOCIAL_TRENDING_POST_PER_TAG, MASTODON_SOCIAL_TRENDING_TAGS} from "../consts.js";
 
 export class MastodonFetcher extends Fetcher {
   
@@ -10,7 +8,7 @@ export class MastodonFetcher extends Fetcher {
    * @returns {Promise<Array>} - A promise that resolves to an array of Post elements
    */
   async fetchPosts() {
-    const hashtags = await this.#fetchTrendingTagsMastodon(mastodonTagsURL);
+    const hashtags = await this.#fetchTrendingTagsMastodon(MASTODON_SOCIAL_TRENDING_TAGS);
     let json_posts = [];
     for (const tag of hashtags) {
       let response = await this.#fetchPostsByHashtagMastodon(tag.name);
@@ -50,7 +48,7 @@ export class MastodonFetcher extends Fetcher {
    */
   async #fetchPostsByHashtagMastodon(hashtag) {
     console.log("Fetching posts for hashtag: ", hashtag)
-    const endpoint  = postPrefix + hashtag;
+    const endpoint  = MASTODON_SOCIAL_TRENDING_POST_PER_TAG + hashtag;
     try {
       const response = await fetch(endpoint);
       if (!response.ok) {
@@ -82,6 +80,7 @@ export class MastodonFetcher extends Fetcher {
 }
 
 // maybe we should have this function, and call it instead of calling the above functions
+// TODO: The below function might not be used at all if we follow the code above
 export async function fetchTrendingPosts(){
   const hashtags = await fetchTrendingTagsMastodon(mastodonTagsURL);
   let json_posts = [];

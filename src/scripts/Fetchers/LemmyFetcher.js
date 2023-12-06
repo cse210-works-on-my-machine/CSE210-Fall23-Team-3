@@ -1,6 +1,6 @@
 import { Fetcher } from "./Fetcher.js";
+import { LEMMY_TRENDING_POSTS } from "../consts.js";
 
-const endpoint = 'https://lemmy.ml/api/v3/post/list?sort=Hot';
 
 export class LemmyFetcher extends Fetcher {
 
@@ -10,7 +10,7 @@ export class LemmyFetcher extends Fetcher {
      */
     async fetchPosts() {
         try {
-            const response = await fetch(endpoint);
+            const response = await fetch(LEMMY_TRENDING_POSTS);
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
