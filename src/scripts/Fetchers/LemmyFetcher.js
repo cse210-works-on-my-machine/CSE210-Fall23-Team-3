@@ -6,7 +6,8 @@ export class LemmyFetcher extends Fetcher {
 
     /**
      * 
-     * @returns {Promise<Array>} - A promise that resolves to an array of Post elements
+     * Fetches trending posts from Lemmy API and displays them using custom fedi-post HTML element
+     * Webpage container is directly updated to reduce response time
      */
     async fetchPosts() {
         try {
@@ -15,12 +16,10 @@ export class LemmyFetcher extends Fetcher {
                 throw new Error(`HTTP error: ${response.status}`);
             }
             let response_data = await response.json();
-            let posts = []
             const posts_json = response_data.posts
             posts_json.forEach(post => {
-                posts.push(this.#createPost(post))
+                this.container.appendChild(this.#createPost(post))
             });
-            return posts
         } catch (error) {
             console.error(`Failed to fetch trending posts:`, error);
             return null;
