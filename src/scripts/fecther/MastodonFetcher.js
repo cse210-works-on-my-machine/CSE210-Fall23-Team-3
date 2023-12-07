@@ -1,6 +1,7 @@
 import * as constant from "../entity/Constant.js";
+import { Fetcher } from "./Fetcher.js";
 
-export class MastodonFetcher {
+export class MastodonFetcher extends Fetcher{
     /**
      * 
      * @returns {Promise<Array>} - A promise that resolves to an array of Post elements

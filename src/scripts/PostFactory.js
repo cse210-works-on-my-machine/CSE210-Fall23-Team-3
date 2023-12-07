@@ -5,6 +5,7 @@ import { MastodonFetcher } from "./fecther/MastodonFetcher.js";
 import { MastodonDisplay } from "./display/MastodonDisplay.js";
 
 export class PostFactory {
+
   static getPostByInstance(instance) {
     switch (instance) {
       case constant.LEMMY:

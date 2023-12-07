@@ -1,5 +1,11 @@
-export class LemmyDisplay {
+import { Display } from "./Display.js"
 
+export class LemmyDisplay extends Display{
+    /**
+     * 
+     * @param {HTMLElement} container - "featuredTagsPosts"
+     * @param {Array<Object>} posts - array of raw post objects
+     */
     displayPosts(container, posts) {
         posts.forEach(post => {
             container.appendChild(this.#processPost(post))
