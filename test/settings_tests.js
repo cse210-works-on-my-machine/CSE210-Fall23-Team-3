@@ -5,14 +5,13 @@ import * as settings from '../src/scripts/settings.js';
 // Mock localStorage
 let mockStorage = {
     store: {},
-    getItem: key => {
+    getItem(key) {
         return this.store[key];
     },
-    setItem: (key, value) => {
-        console.log(this);
+    setItem(key, value) {
         this.store[key] = value.toString();
     },
-    clear: () => {
+    clear() {
         this.store = {};
     }
 };
@@ -21,8 +20,8 @@ mockStorage.setItem('foo', 'bar');
 describe('Fetching instance lists', () => {
     it('Should return default lists', () => {
         let lists = settings.fetchInstanceLists(mockStorage);
-        for (let [network, list] of lists) {
-            list.forEach(url => assert(url in DEFAULT_LISTS[network]));
+        for (let [network, list] of Object.entries(lists)) {
+            list.forEach(url => assert.ok(settings.DEFAULT_LISTS[network].includes(url)));
         }
     })
 });

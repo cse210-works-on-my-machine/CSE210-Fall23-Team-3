@@ -1,4 +1,4 @@
-const DEFAULT_LISTS = {
+export const DEFAULT_LISTS = {
     mastodon:['https://mastodon.social', 'https://fosstodon.org'],
     lemmy:['https://lemmy.ml']
 }
@@ -20,7 +20,8 @@ function setDefaultLists(storage = localStorage) {
 export function fetchInstanceLists(storage = localStorage) {
     if (!(INST_LISTS in storage)) {
         setDefaultLists(storage);
-        return DEFAULT_LISTS;
+        // can return DEFAULT_LISTS as a fallback against localStorage not working
+        // but is that even necessary?
     }
     return JSON.parse(storage.getItem(INST_LISTS));
 }
