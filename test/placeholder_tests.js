@@ -1,6 +1,5 @@
-const test = require("node:test");
-const { describe, it } = require("node:test");
-const assert = require("assert");
+import { describe, it } from 'node:test';
+import * as assert from 'assert';
 
 // Placeholder nodejs native tests
 describe("Placeholder Tests", () => {

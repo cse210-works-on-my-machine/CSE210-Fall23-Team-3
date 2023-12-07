@@ -8,8 +8,8 @@ const INST_LISTS = 'instanceLists';
 /**
  * Loads hardcoded default instance lists into localStorage.
  */
-function setDefaultLists() {
-    saveLists(DEFAULT_LISTS);
+function setDefaultLists(storage = localStorage) {
+    saveLists(DEFAULT_LISTS, storage);
 }
 
 /**
@@ -17,35 +17,23 @@ function setDefaultLists() {
  * sets them to the hardcoded defaults before returning them.
  * @returns The current set of instance lists, as an object of arrays indexed by network name.
  */
-function fetchInstanceLists() {
-    if (!(INST_LISTS in localStorage)) {
-        setDefaultLists();
+export function fetchInstanceLists(storage = localStorage) {
+    if (!(INST_LISTS in storage)) {
+        setDefaultLists(storage);
         return DEFAULT_LISTS;
     }
-    return JSON.parse(localStorage.getItem(INST_LISTS));
+    return JSON.parse(storage.getItem(INST_LISTS));
 }
 
-function saveLists(instanceLists) {
-    localStorage.setItem(INST_LISTS, JSON.stringify(instanceLists))
-}
-
-
-/**
- * Wrapper function for local storage object conversion.
- * @precondition obj_str must either be a valid JSON string or null.
- * This shouldn't be a problem unless local storage is corrupted.
- * @param {string | null} obj_str 
- * @returns {object} JSON parsed object string, or an empty object if null
- */
-function to_obj(obj_str) {
-    return (obj_str) === null? {} : JSON.parse(obj_str)
+function saveLists(instanceLists, storage) {
+    storage.setItem(INST_LISTS, JSON.stringify(instanceLists))
 }
 
 /**
  * @param {string} network The name of the network (e.g. 'mastodon' or 'lemmy')
  * @param {*} url The URL of the instance to add.
  */
-function addInstance(network, url) {
+export function addInstance(network, url, storage = localStorage) {
     
     // TODO: move call out of this function? (may separate concerns better)
     if (!validInstance(network, url)) {
@@ -57,7 +45,7 @@ function addInstance(network, url) {
     } else {
         instanceList[network] = [url];
     }
-    localStorage.setItem(INST_LISTS, JSON.stringify(instanceList));
+    storage.setItem(INST_LISTS, JSON.stringify(instanceList));
 }
 
 /**
@@ -65,8 +53,8 @@ function addInstance(network, url) {
  * @param {*} network 
  * @param {*} url 
  */
-function removeInstance(network, url) {
-    let instanceLists = fetchInstanceLists();
+function removeInstance(network, url, storage = localStorage) {
+    let instanceLists = fetchInstanceLists(storage);
     if (network in instanceLists && url in instanceLists[network]) {
         delete instanceLists[network][instanceLists[network].indexOf(url)];
     }
@@ -85,28 +73,6 @@ async function validInstance(network, url) {
         const response = await fetch(`${url}/api/v2/instance`);
         return response.status === 200;
     }
-}
-
-// useful for fetching stuff/algorithm, read from local storage
-// also for loading settings page
-// if localstorage empty return default instance list?
-/**
- * 
- * @param {string} network The name of the Fediverse network.
- * @returns {Array} A list of instance URLs the user has configured, or a default list if none are available,
- * or an empty list if the network name is invalid (should never happen due to verifyInstance)
- */
-
-// TODO: design decision -- fetch localStorage every time?
-function getInstanceList(network) {
-    let instanceLists = to_obj(localStorage.getItem(INST_LISTS));
-
-    if (network in instanceLists) {
-        return instanceLists[network];
-    } else if (network in DEFAULT_LISTS) {
-        return DEFAULT_LISTS[network];
-    }
-    return [];
 }
 
 // TODO: implement if we have time
