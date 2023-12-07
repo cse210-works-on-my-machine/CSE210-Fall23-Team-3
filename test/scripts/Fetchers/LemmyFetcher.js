@@ -12,10 +12,13 @@ global.document = window.document;
 describe('LemmyFetcher', () => {
 
     let fetchStub;
+    let lemmyFetcher;
 
     beforeEach(() => {
         // Create a stub for the global fetch
         fetchStub = sinon.stub(global, 'fetch');
+        lemmyFetcher = new LemmyFetcher();
+        lemmyFetcher.container = global.document.createElement('div');
     });
 
     describe('#fetchPosts', () => {
@@ -42,8 +45,9 @@ describe('LemmyFetcher', () => {
         // Pass the mock response to the fetch stub
         fetchStub.resolves(mockResponse);
    
-        const lemmyFetcher = new LemmyFetcher();
-        const posts = await lemmyFetcher.fetchPosts();
+        await lemmyFetcher.fetchPosts();
+
+        const posts = lemmyFetcher.container.querySelectorAll('fedi-post');
    
         assert.strictEqual(posts.length, 2);
         assert.strictEqual(posts[0].getAttribute('id'), '1');
