@@ -1,6 +1,8 @@
 import * as constant from "../entity/Constant.js";
 import { Fetcher } from "./Fetcher.js";
 
+const NUM_POSTS = 50;
+
 export class LemmyFetcher extends Fetcher {
     /**
      * 
@@ -9,7 +11,8 @@ export class LemmyFetcher extends Fetcher {
     async fetchPosts() {
         const posts = [];
         try {
-            const response = await fetch(constant.LEMMY_TRENDING_POSTS);
+            const url = constant.LEMMY_TRENDING_POSTS + "&limit=" + NUM_POSTS;
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
