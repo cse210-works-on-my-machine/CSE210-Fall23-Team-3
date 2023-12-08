@@ -12,7 +12,7 @@ export class MastodonFetcher extends Fetcher{
             const posts = []
             for (const tag of hashtags) {
                 let response = await this.#fetchPostsByHashtag(tag.name);
-                posts.push(response);
+                posts.push(...response);
             }
             return posts;
         } catch (error) {

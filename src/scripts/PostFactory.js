@@ -1,7 +1,7 @@
 import * as constant from "./entity/Constant.js"
-import { LemmyFetcher } from "./fecthers/LemmyFetcher.js";
+import { LemmyFetcher } from "./fetchers/LemmyFetcher.js";
 import { LemmyDisplay } from "./displays/LemmyDisplay.js";
-import { MastodonFetcher } from "./fecthers/MastodonFetcher.js";
+import { MastodonFetcher } from "./fetchers/MastodonFetcher.js";
 import { MastodonDisplay } from "./displays/MastodonDisplay.js";
 
 export class PostFactory {

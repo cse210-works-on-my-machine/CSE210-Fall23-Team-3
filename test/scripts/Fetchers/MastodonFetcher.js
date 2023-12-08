@@ -26,20 +26,21 @@ describe('MastodonFetcher', () => {
           {'name': 'tag2'}
          ]), { status: 200 })));
         
-
-        // Define a mock response
-        const mockResponse = {
+         const mockResponse = {
           ok: true,
           json: async function() {
-            return {
-              posts: [
-                {
-                    'id': 1, 'content': 'Test post', 'created_at': '2023-12-06', 'authr-name': 'Test user','author-image-url': 'http://example.com/avatar.jpg', 'author-handle': 'testuser' 
-                }
-              ]
-            };
+              return [
+                  {
+                      'id': 1, 
+                      'content': 'Test post', 
+                      'created_at': '2023-12-06', 
+                      'author-name': 'Test user',
+                      'author-image-url': 'http://example.com/avatar.jpg', 
+                      'author-handle': 'testuser' 
+                  }
+              ];
           }
-        };
+      };
 
         // Fetch the mock response for each of the tags
         fetchStub.withArgs(Constant.MASTODON_SOCIAL_TRENDING_POST_PER_TAG + 'tag1').resolves(mockResponse);
