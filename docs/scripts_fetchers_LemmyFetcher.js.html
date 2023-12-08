@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js_doc_test.js</title>
+    <title>JSDoc: Source: scripts/fetchers/LemmyFetcher.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js_doc_test.js</h1>
+    <h1 class="page-title">Source: scripts/fetchers/LemmyFetcher.js</h1>
 
     
 
@@ -26,16 +26,37 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
-* Adds two numbers together.
-* @param {number} a The first number.
-* @param {number} b The second number.
-* @returns {number} The sum of the two numbers.
-*/
-export function add(a, b) {
-    return a + b;
+            <pre class="prettyprint source linenums"><code>import * as constant from "../entity/Constant.js";
+import { Fetcher } from "./Fetcher.js";
+
+const NUM_POSTS = 50;
+
+export class LemmyFetcher extends Fetcher {
+    /**
+     * 
+     * @returns {Promise&lt;Array>} - A promise that resolves to an array of raw posts from the API
+     */
+    async fetchPosts() {
+        const posts = [];
+        try {
+            const url = constant.LEMMY_TRENDING_POSTS + "&amp;limit=" + NUM_POSTS;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            let response_data = await response.json();
+            const posts_json = response_data.posts;
+            posts_json.forEach(post => {
+                posts.push(post);
+            });
+            return posts;
+        } catch (error) {
+            console.error(`Failed to fetch trending posts:`, error);
+            return null;
+        }
+    }
 }
-  </code></pre>
+</code></pre>
         </article>
     </section>
 
