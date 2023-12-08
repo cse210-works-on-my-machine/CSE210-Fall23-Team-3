@@ -42,7 +42,7 @@ export class MastodonFetcher extends Fetcher{
     /**
      *
      * @param {string} hashtag - The hashtag to fetch posts for
-     * @returns
+     * @returns {Promise<Array>} - A promise that resolves to an array of posts for the given hashtag
      */
     async #fetchPostsByHashtag(hashtag) {
       const endpoint  = constant.MASTODON_SOCIAL_TRENDING_POST_PER_TAG + hashtag;
