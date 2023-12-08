@@ -49,6 +49,7 @@ describe('LemmyFetcher', () => {
         assert.strictEqual(posts[1].post.id, 2);
         assert.strictEqual(posts[1].post.body, 'Test post');
         assert.strictEqual(posts[1].post.url, 'some-url.com');
+        assert.strictEqual(posts[1].post.published, '2023-12-06');
         
       });
     });

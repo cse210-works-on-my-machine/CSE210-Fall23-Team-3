@@ -16,6 +16,7 @@ export class MastodonDisplay extends Display {
       });*/
     }
 
+    // TODO: review this function, remove if not needed
     #interleaveArrays(responses) {
         const maxLength = Math.max(...responses.map(response => response.length));
         const result = [];

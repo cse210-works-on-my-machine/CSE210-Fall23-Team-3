@@ -21,12 +21,11 @@ describe('MastodonFetcher', () => {
     describe('#fetchPosts', () => {
       it('should return an array of posts', async function() {
 
-        fetchStub.withArgs(Constant.MASTODON_SOCIAL_TRENDING_TAGS).returns(Promise.resolve(new Response(JSON.stringify([
+        fetchStub.withArgs(Constant.MASTODON_SOCIAL_TRENDING_TAGS).resolves(Promise.resolve(new Response(JSON.stringify([
           {'name': 'tag1'}, 
           {'name': 'tag2'}
          ]), { status: 200 })));
-         
-
+        
 
         // Define a mock response
         const mockResponse = {
@@ -35,23 +34,20 @@ describe('MastodonFetcher', () => {
             return {
               posts: [
                 {
-                    'id': 1, content: 'Test post', 'created_at': '2023-12-06', 'authr-name': 'Test user','author-image-url': 'http://example.com/avatar.jpg', 'author-handle': 'testuser' 
+                    'id': 1, 'content': 'Test post', 'created_at': '2023-12-06', 'authr-name': 'Test user','author-image-url': 'http://example.com/avatar.jpg', 'author-handle': 'testuser' 
                 }
               ]
             };
           }
         };
 
+        // Fetch the mock response for each of the tags
         fetchStub.withArgs(Constant.MASTODON_SOCIAL_TRENDING_POST_PER_TAG + 'tag1').resolves(mockResponse);
         fetchStub.withArgs(Constant.MASTODON_SOCIAL_TRENDING_POST_PER_TAG + 'tag2').resolves(mockResponse);
    
-        // Pass the mock response to the fetch stub
-        fetchStub.resolves(mockResponse);
-   
         const posts =  await mastodonFetcher.fetchPosts();
-
-        assert.strictEqual(posts.length, 1);
-
+        
+        assert.strictEqual(posts.length, 2);
 
       });
     });
