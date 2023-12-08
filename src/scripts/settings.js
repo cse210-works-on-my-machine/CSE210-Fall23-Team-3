@@ -18,7 +18,7 @@ function setDefaultLists(storage = localStorage) {
  * @returns The current set of instance lists, as an object of arrays indexed by network name.
  */
 export function fetchInstanceLists(storage = localStorage) {
-    if (!(INST_LISTS in storage)) {
+    if (storage.getItem(INST_LISTS) === null) {
         setDefaultLists(storage);
         // can return DEFAULT_LISTS as a fallback against localStorage not working
         // but is that even necessary?
@@ -54,11 +54,14 @@ export function addInstance(network, url, storage = localStorage) {
  * @param {*} network 
  * @param {*} url 
  */
-function removeInstance(network, url, storage = localStorage) {
+export function removeInstance(network, url, storage = localStorage) {
     let instanceLists = fetchInstanceLists(storage);
-    if (network in instanceLists && url in instanceLists[network]) {
-        delete instanceLists[network][instanceLists[network].indexOf(url)];
+    console.log(instanceLists);
+    if (network in instanceLists && instanceLists[network].includes(url)) {
+        instanceLists[network].splice(instanceLists[network].indexOf(url),1);
+        console.log(instanceLists[network]);
     }
+    saveLists(instanceLists, storage);
 }
 
 // TODO: how tf is this async gonna work
