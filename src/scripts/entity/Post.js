@@ -62,7 +62,6 @@ export class Post extends HTMLElement {
         this.setAttribute('author-handle', value);
     }
 
-
     render() {
         this.shadowRoot.innerHTML = `
             <style>
