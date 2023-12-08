@@ -7,13 +7,13 @@ export class MastodonDisplay extends Display {
      * @param {Array<Object>} posts - array of raw post objects
      */
     displayPosts(container, posts){
-      for (const postsByTag of posts) {
-          container.appendChild(this.#processPost(postsByTag[0]))
+      for (const post of posts) {
+          container.appendChild(this.#processPost(post))
       }
-      let results = this.#interleaveArrays(posts);
+      /*let results = this.#interleaveArrays(posts);
       results.forEach(json_post => {
           container.appendChild(this.#processPost(json_post));
-      });
+      });*/
     }
 
     #interleaveArrays(responses) {

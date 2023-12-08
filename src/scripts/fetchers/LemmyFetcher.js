@@ -4,7 +4,7 @@ import { Fetcher } from "./Fetcher.js";
 export class LemmyFetcher extends Fetcher {
     /**
      * 
-     * @returns {Promise<Array>} - A promise that resolves to an array of Post elements
+     * @returns {Promise<Array>} - A promise that resolves to an array of raw posts from the API
      */
     async fetchPosts() {
         const posts = [];

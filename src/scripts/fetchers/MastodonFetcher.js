@@ -4,15 +4,17 @@ import { Fetcher } from "./Fetcher.js";
 export class MastodonFetcher extends Fetcher{
     /**
      * 
-     * @returns {Promise<Array>} - A promise that resolves to an array of Post elements
+     * @returns {Promise<Array>} - A promise that resolves to an array of raw post data from the API
      */
     async fetchPosts() {
         try {
             const hashtags = await this.#fetchTrendingTags(constant.MASTODON_SOCIAL_TRENDING_TAGS);
             const posts = []
+            console.log("Fetching posts for hashtags: ", hashtags)
             for (const tag of hashtags) {
+                console.log("Fetching posts for hashtag: ", tag.name)
                 let response = await this.#fetchPostsByHashtag(tag.name);
-                posts.push(response);
+                posts.push(...response);
             }
             return posts;
         } catch (error) {

@@ -1,13 +1,8 @@
 import {describe, it, after, afterEach, before, beforeEach} from 'node:test';
-import {JSDOM} from 'jsdom';
 import * as assert from 'assert';
-import {test} from 'node:test';
-import { LemmyFetcher } from "../../../src/scripts/Fetchers/LemmyFetcher.js";
+import { LemmyFetcher } from "../../../src/scripts/fetchers/LemmyFetcher.js";
 import fetch from 'node-fetch';
 import sinon from 'sinon';
-
-const {window} = new JSDOM(`...`);
-global.document = window.document;
 
 describe('LemmyFetcher', () => {
 
@@ -18,7 +13,6 @@ describe('LemmyFetcher', () => {
         // Create a stub for the global fetch
         fetchStub = sinon.stub(global, 'fetch');
         lemmyFetcher = new LemmyFetcher();
-        lemmyFetcher.container = global.document.createElement('div');
     });
 
     describe('#fetchPosts', () => {
@@ -34,7 +28,7 @@ describe('LemmyFetcher', () => {
                   creator: { name: 'Test user', avatar: 'http://example.com/avatar.jpg', matrix_user_id: 'testuser' }
                 },
                 {
-                    post: { id: 1, published: '2023-12-06', body: 'Test post', url: 'some-url.com' }, // Post with body and url
+                    post: { id: 2, published: '2023-12-06', body: 'Test post', url: 'some-url.com' }, // Post with body and url
                     creator: { name: 'Test user2', avatar: 'http://example.com/avatar.jpg', matrix_user_id: 'testuser' }
                 },
               ]
@@ -45,23 +39,17 @@ describe('LemmyFetcher', () => {
         // Pass the mock response to the fetch stub
         fetchStub.resolves(mockResponse);
    
-        await lemmyFetcher.fetchPosts();
-
-        const posts = lemmyFetcher.container.querySelectorAll('fedi-post');
+        const posts = await lemmyFetcher.fetchPosts();
    
         assert.strictEqual(posts.length, 2);
-        assert.strictEqual(posts[0].getAttribute('id'), '1');
+        assert.strictEqual(posts[0].post.id, 1);
+        assert.strictEqual(posts[0].post.body, 'Test post');
+        assert.strictEqual(posts[0].post.published, '2023-12-06');
 
-        // First post with only body
-        assert.strictEqual(posts[0].getAttribute('content'), 'Test post');
-        assert.strictEqual(posts[0].getAttribute('author-name'), 'Test user');
-        assert.strictEqual(posts[0].getAttribute('created-at'), '2023-12-06');
-        assert.strictEqual(posts[0].getAttribute('author-image-url'), 'http://example.com/avatar.jpg');
-        assert.strictEqual(posts[0].getAttribute('author-handle'), 'testuser');
-
-        // Second post with body and url
-        assert.strictEqual(posts[1].getAttribute('content'), 'Test post\nURL: some-url.com');
-        assert.strictEqual(posts[1].getAttribute('author-name'), 'Test user2');
+        assert.strictEqual(posts[1].post.id, 2);
+        assert.strictEqual(posts[1].post.body, 'Test post');
+        assert.strictEqual(posts[1].post.url, 'some-url.com');
+        
       });
     });
 });
