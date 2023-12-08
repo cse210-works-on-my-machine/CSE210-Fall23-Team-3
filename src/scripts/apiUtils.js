@@ -33,3 +33,4 @@ export async function fetchPostsByHashtag(prefix, hashtag) {
     return null;
   }
 }
+

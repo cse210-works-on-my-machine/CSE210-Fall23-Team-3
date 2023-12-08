@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js_doc_test.js</title>
+    <title>JSDoc: Source: scripts/displays/Display.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: js_doc_test.js</h1>
+    <h1 class="page-title">Source: scripts/displays/Display.js</h1>
 
     
 
@@ -27,15 +27,18 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
-* Adds two numbers together.
-* @param {number} a The first number.
-* @param {number} b The second number.
-* @returns {number} The sum of the two numbers.
-*/
-export function add(a, b) {
-    return a + b;
+ * @interface
+ * Display class that will be subclassed by the different Displays
+ */
+export class Display {
+    constructor(){
+    }
+
+    displayPost(){
+        throw new Error("Not implemented - You must implement displayPost() in a subclass");
+    }
 }
-  </code></pre>
+</code></pre>
         </article>
     </section>
 
