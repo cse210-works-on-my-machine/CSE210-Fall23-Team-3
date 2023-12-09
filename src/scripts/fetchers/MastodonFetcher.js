@@ -11,6 +11,7 @@ export class MastodonFetcher extends Fetcher{
             const hashtags = await this.#fetchTrendingTags(constant.MASTODON_SOCIAL_TRENDING_TAGS);
             const posts = []
             for (const tag of hashtags) {
+                console.log("Fetching posts for tag: " + tag.name);
                 let response = await this.#fetchPostsByHashtag(tag.name);
                 posts.push(...response);
             }
