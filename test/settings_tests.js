@@ -26,7 +26,20 @@ describe('Fetching instance lists', () => {
     it('Allows removal of a default instance', () => {
         settings.removeInstance('mastodon', settings.DEFAULT_LISTS['mastodon'][0], mockStorage);
         let l2 = settings.fetchInstanceLists(mockStorage);
-        settings.fetchInstanceLists(mockStorage); // make sure fetch is idempotent in this case
         assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length-1);
-    })
+    });
+    it('Reject a bad instance URL', async () => {
+        let before = settings.fetchInstanceLists(mockStorage);
+        let success = await settings.addInstance('lemmy', 'https://yeet.lmao', mockStorage);
+        let after = settings.fetchInstanceLists(mockStorage);
+        assert.strictEqual(success, false);
+        assert.strictEqual(before['lemmy'].length, after['lemmy'].length);
+    });
+    it('Accept a good URL', async () => {
+        let before = settings.fetchInstanceLists(mockStorage);
+        let success = await settings.addInstance('lemmy', 'https://mtgzone.com', mockStorage);
+        let after = settings.fetchInstanceLists(mockStorage);
+        assert.strictEqual(success, true);
+        assert.strictEqual(before['lemmy'].length+1, after['lemmy'].length);
+    });
 });

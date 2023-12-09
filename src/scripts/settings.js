@@ -4,9 +4,11 @@ export const DEFAULT_LISTS = {
 }
 
 const INST_LISTS = 'instanceLists';
+const ALLOWED_NETWORKS = new Set(['mastodon', 'lemmy']);
 
 /**
  * Loads hardcoded default instance lists into localStorage.
+ * @param {Storage} storage The storage object to reset to default.
  */
 function setDefaultLists(storage = localStorage) {
     saveLists(DEFAULT_LISTS, storage);
@@ -26,6 +28,11 @@ export function fetchInstanceLists(storage = localStorage) {
     return JSON.parse(storage.getItem(INST_LISTS));
 }
 
+/**
+ * Takes an object, stringifies it and stores it in storage.
+ * @param {Object} instanceLists An object, should be pairs of network names and URL string arrays
+ * @param {*} storage The storage object to write to with the key 'instanceLists'
+ */
 function saveLists(instanceLists, storage) {
     storage.setItem(INST_LISTS, JSON.stringify(instanceLists))
 }
@@ -33,20 +40,28 @@ function saveLists(instanceLists, storage) {
 /**
  * @param {string} network The name of the network (e.g. 'mastodon' or 'lemmy')
  * @param {*} url The URL of the instance to add.
+ * @returns {boolean} True if the instance addition was successful, False otherwise
  */
-export function addInstance(network, url, storage = localStorage) {
-    
-    // TODO: move call out of this function? (may separate concerns better)
-    if (!validInstance(network, url)) {
-        return;
+export async function addInstance(network, url, storage = localStorage) {
+    // TODO: move validation out of this function? (may separate concerns better)
+    if (!(ALLOWED_NETWORKS.has(network)) || !validUrl(url)) return false;
+    try {
+        let response = await fetch(url);
+        if (response.status !== 200) return false;
+    } catch (_) {
+        return false;
     }
-    let instanceList = fetchInstanceLists();
+    
+    let instanceList = fetchInstanceLists(storage);
+    // Add URL to existing list or create new one if necessary
     if (network in instanceList) {
         instanceList[network].push(url);
     } else {
         instanceList[network] = [url];
     }
+    console.log(instanceList[network])
     storage.setItem(INST_LISTS, JSON.stringify(instanceList));
+    return true;
 }
 
 /**
@@ -56,26 +71,22 @@ export function addInstance(network, url, storage = localStorage) {
  */
 export function removeInstance(network, url, storage = localStorage) {
     let instanceLists = fetchInstanceLists(storage);
-    console.log(instanceLists);
     if (network in instanceLists && instanceLists[network].includes(url)) {
         instanceLists[network].splice(instanceLists[network].indexOf(url),1);
-        console.log(instanceLists[network]);
     }
     saveLists(instanceLists, storage);
 }
 
-// TODO: how tf is this async gonna work
 /**
- * @param {string} network A string indicating the name of the network this is an instance of 
- * @param {string} url The URL to ping as a valid network instance
- * @returns {boolean} True if the instance URL is valid, False otherwise
+ * @param {string} url A URL string to validate
+ * @returns {boolean} true if the URL string is valid, false otherwise
  */
-async function validInstance(network, url) {
-    // TODO: refactor from branching logic
-    if (network === 'mastodon') {
-        // TODO: look into using instance info
-        const response = await fetch(`${url}/api/v2/instance`);
-        return response.status === 200;
+function validUrl(url) {
+    try {
+        new URL(url);
+        return true;
+    } catch {
+        return false;
     }
 }
 
