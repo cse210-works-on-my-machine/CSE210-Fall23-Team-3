@@ -71,7 +71,90 @@ describe('Paginator', () => {
         // Should display the first two posts
         let featuredTagsPosts = document.getElementById('featuredTagsPosts');
         assert.strictEqual(featuredTagsPosts.children.length, 2);
-
+        assert.strictEqual(pageLabel.innerHTML, 'Page 1');
       });
+    });
+
+    it('should display page 2 when nextPage() is called', async function() {
+        const posts = mockPosts.map(postData => {
+            const postElement =  global.document.createElement('fedi-post');
+            postElement.setAttribute('id', postData.id);
+            postElement.setAttribute('content', postData.content);
+            postElement.setAttribute('author-name', postData.authorName);
+            postElement.setAttribute('created-at', postData.createdAt);
+            postElement.setAttribute('author-image-url', postData.authorImageURL);
+            postElement.setAttribute('author-handle', postData.authorHandle);
+            return postElement;
+            });
+
+        // Import the paginator
+        paginatorImport = await import('../src/scripts/paginator.js');
+        paginator = new paginatorImport.Paginator(posts, 2);
+
+        // Should display the first two posts - before clicking next
+        let featuredTagsPosts = document.getElementById('featuredTagsPosts');
+        assert.strictEqual(featuredTagsPosts.children.length, 2);
+
+        // Should display the next two posts (well actually one since length is 3)
+        paginator.nextPage();
+        assert.strictEqual(featuredTagsPosts.children.length, 1);
+        assert.strictEqual(pageLabel.innerHTML, 'Page 2');
+    });
+
+    it('should stay at page 1 when prevPage() is called at page 1', async function() {
+        const posts = mockPosts.map(postData => {
+            const postElement =  global.document.createElement('fedi-post');
+            postElement.setAttribute('id', postData.id);
+            postElement.setAttribute('content', postData.content);
+            postElement.setAttribute('author-name', postData.authorName);
+            postElement.setAttribute('created-at', postData.createdAt);
+            postElement.setAttribute('author-image-url', postData.authorImageURL);
+            postElement.setAttribute('author-handle', postData.authorHandle);
+            return postElement;
+            });
+
+        // Import the paginator
+        paginatorImport = await import('../src/scripts/paginator.js');
+        paginator = new paginatorImport.Paginator(posts, 2);
+
+        // Should display the first two posts - before clicking next
+        let featuredTagsPosts = document.getElementById('featuredTagsPosts');
+        assert.strictEqual(featuredTagsPosts.children.length, 2);
+
+        // Should stay at page 1
+        paginator.prevPage();
+        assert.strictEqual(featuredTagsPosts.children.length, 2);
+        assert.strictEqual(pageLabel.innerHTML, 'Page 1');
+    });
+
+    it('shuld display page 1 when prevPage() is called at page 2', async function() {
+        const posts = mockPosts.map(postData => {
+            const postElement =  global.document.createElement('fedi-post');
+            postElement.setAttribute('id', postData.id);
+            postElement.setAttribute('content', postData.content);
+            postElement.setAttribute('author-name', postData.authorName);
+            postElement.setAttribute('created-at', postData.createdAt);
+            postElement.setAttribute('author-image-url', postData.authorImageURL);
+            postElement.setAttribute('author-handle', postData.authorHandle);
+            return postElement;
+            });
+
+        // Import the paginator
+        paginatorImport = await import('../src/scripts/paginator.js');
+        paginator = new paginatorImport.Paginator(posts, 2);
+
+        // Should display the first two posts - before clicking next
+        let featuredTagsPosts = document.getElementById('featuredTagsPosts');
+        assert.strictEqual(featuredTagsPosts.children.length, 2);
+
+        // Should display the next two posts (well actually one since length is 3)
+        paginator.nextPage();
+        assert.strictEqual(featuredTagsPosts.children.length, 1);
+        assert.strictEqual(pageLabel.innerHTML, 'Page 2');
+
+        // Should display the first two posts
+        paginator.prevPage();
+        assert.strictEqual(featuredTagsPosts.children.length, 2);
+        assert.strictEqual(pageLabel.innerHTML, 'Page 1');
     });
 });
