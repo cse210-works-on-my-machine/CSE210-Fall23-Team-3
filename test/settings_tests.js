@@ -28,9 +28,16 @@ describe('Fetching instance lists', () => {
         let l2 = settings.fetchInstanceLists(mockStorage);
         assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length-1);
     });
-    it('Reject a bad instance URL', async () => {
+    it('Reject a URL that doesn\'t fetch', async () => {
         let before = settings.fetchInstanceLists(mockStorage);
         let success = await settings.addInstance('lemmy', 'https://yeet.lmao', mockStorage);
+        let after = settings.fetchInstanceLists(mockStorage);
+        assert.strictEqual(success, false);
+        assert.strictEqual(before['lemmy'].length, after['lemmy'].length);
+    });
+    it('Reject a malformed URL', async () => {
+        let before = settings.fetchInstanceLists(mockStorage);
+        let success = await settings.addInstance('lemmy', 'skidibibopmdada', mockStorage);
         let after = settings.fetchInstanceLists(mockStorage);
         assert.strictEqual(success, false);
         assert.strictEqual(before['lemmy'].length, after['lemmy'].length);

@@ -53,13 +53,8 @@ export async function addInstance(network, url, storage = localStorage) {
     }
     
     let instanceList = fetchInstanceLists(storage);
-    // Add URL to existing list or create new one if necessary
-    if (network in instanceList) {
-        instanceList[network].push(url);
-    } else {
-        instanceList[network] = [url];
-    }
-    console.log(instanceList[network])
+    // network is already guaranteed to be in ALLOWED_NETWORKS and thus on the default list
+    instanceList[network].push(url);
     storage.setItem(INST_LISTS, JSON.stringify(instanceList));
     return true;
 }
@@ -88,10 +83,4 @@ function validUrl(url) {
     } catch {
         return false;
     }
-}
-
-// TODO: implement if we have time
-// use CSS variables
-function updateTheme() {
-
 }
