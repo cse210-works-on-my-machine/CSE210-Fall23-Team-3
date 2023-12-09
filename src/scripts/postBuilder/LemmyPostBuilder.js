@@ -1,6 +1,6 @@
-import { Display } from "./Display.js"
+import { PostBuilder } from "./PostBuilder.js"
 
-export class LemmyDisplay extends Display{
+export class LemmyPostBuilder extends PostBuilder{
     /**
      * 
      * @param {HTMLElement} container - "featuredTagsPosts"
@@ -8,16 +8,16 @@ export class LemmyDisplay extends Display{
      */
     displayPosts(container, posts) {
         posts.forEach(post => {
-            container.appendChild(this.#processPost(post))
+            container.appendChild(this.buildPost(post))
         });
     }
 
     /**
      * 
      * @param {Object} post - raw post object from the API
-     * @returns - A Post element created from raw json data from the API
+     * @returns {Object}- A Post element created from raw json data from the API
      */
-    #processPost(post) {
+    buildPost(post) {
         let newPost = document.createElement("fedi-post");
         newPost.setAttribute('id', post.post.id);
         newPost.setAttribute('content', this.#extractPostContent(post.post)); // Either a url or body or both. 
