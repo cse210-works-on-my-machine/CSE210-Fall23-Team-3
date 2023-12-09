@@ -61,15 +61,18 @@ export async function addInstance(network, url, storage = localStorage) {
 
 /**
  * Removes an instance from localStorage. Currently O(n) with respect to number of instances.
- * @param {*} network 
- * @param {*} url 
+ * @param {string} network 
+ * @param {string} url
+ * @returns {boolean} True if the removal was successful, false otherwise.
  */
 export function removeInstance(network, url, storage = localStorage) {
     let instanceLists = fetchInstanceLists(storage);
     if (network in instanceLists && instanceLists[network].includes(url)) {
         instanceLists[network].splice(instanceLists[network].indexOf(url),1);
+        saveLists(instanceLists, storage);
+        return true;
     }
-    saveLists(instanceLists, storage);
+    return false;
 }
 
 /**

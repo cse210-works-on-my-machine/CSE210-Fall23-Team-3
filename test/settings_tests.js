@@ -17,19 +17,27 @@ let mockStorage = {
 };
 
 describe('Fetching instance lists', () => {
-    let lists = settings.fetchInstanceLists(mockStorage);
+    const lists = settings.fetchInstanceLists(mockStorage);
     it('Should return default lists', () => {
         for (let [network, list] of Object.entries(lists)) {
             list.forEach(url => assert.ok(settings.DEFAULT_LISTS[network].includes(url)));
         }
     });
-    it('Allows removal of a default instance', () => {
-        settings.removeInstance('mastodon', settings.DEFAULT_LISTS['mastodon'][0], mockStorage);
+    it('Don\'t remove an instance that isn\'t there', () => {
+        let success = settings.removeInstance('mastodon', 'ligma', mockStorage);
         let l2 = settings.fetchInstanceLists(mockStorage);
+        assert.strictEqual(success, false);
+        assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length);
+    });
+    it('Allows removal of a default instance', () => {
+        let success = settings.removeInstance('mastodon', settings.DEFAULT_LISTS['mastodon'][0], mockStorage);
+        let l2 = settings.fetchInstanceLists(mockStorage);
+        assert.strictEqual(success, true);
         assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length-1);
     });
     it('Reject a URL that doesn\'t fetch', async () => {
         let before = settings.fetchInstanceLists(mockStorage);
+        // ESLint says this await doesn't do anything, but it does.
         let success = await settings.addInstance('lemmy', 'https://yeet.lmao', mockStorage);
         let after = settings.fetchInstanceLists(mockStorage);
         assert.strictEqual(success, false);
