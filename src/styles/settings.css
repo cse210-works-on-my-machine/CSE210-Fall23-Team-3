@@ -16,30 +16,62 @@ h1 {
 }
 
 ul {
-    list-style-type: none;
+    padding: 0;
+    list-style-type: inside;
 }
 
 h2 {
     text-align: center;
 }
 
-main section div ul {
+li {
+    padding-bottom: 5px;
     display: grid;
-    grid-template-columns: max-content max-content;
-    grid-template-rows: max-content;
+    grid-template-columns: 1fr max-content;
     gap: 5px;
 }
 
-main section div ul li{
+li button {
+    border-style: outset;
     text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+li input{
+    text-align: left;
     border-style: inset;
     padding: 2px;
 }
 
-.instance-list-item {
+input[type="text"] {
+    font-family: inherit;
+    width: 1fr;
+    height: 1fr;
+    text-align: left;
+    border-style: inset;
+    padding: 2px;
+}
+
+li span {
     background-color: lightgray;
 }
 
+.instances-reset-button {
+    padding-top: 5px;
+    gap: 0;
+}
+
+.instances-reset-button button {
+    border-style: outset;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+/*
 main section div ul button {
     border-style: outset;
     text-align: center;
@@ -48,14 +80,8 @@ main section div ul button {
     font-family: 'Noto Sans', sans-serif;
 }
 
-input[type="text"] {
-    font-family: inherit;
-    width: 1fr;
-    height: 1fr;
-    border: none;
-}
-
 .instances-reset-button {
     border: none;
     border-style: none;
 }
+*/

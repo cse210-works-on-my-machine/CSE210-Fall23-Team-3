@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <script type="module" src="src/scripts/settings.js"></script>
     <title>Blend | What's happening across the Fediverse</title>
 </head>
 <body>
@@ -28,43 +29,23 @@
                 <ul>
                     <li>
                         <input type="text">
+                        <button>
+                            <img src="media/plus.svg" class="icon-small"></img>
+                        </button>
                     </li>
-                    <button>
-                        <img src="media/plus.svg" class="icon-small"></img>
-                    </button>
+                    <li class="instance-list-item">
+                        <span>mastodon.social</span>
+                        <button>
+                            <img src="media/minus.svg" class="icon-small"></img>
+                        </button>
+                    </li>
+                    <li class="instance-list-item">
+                        <span>fosstodon.org</span>
+                        <button>
+                            <img src="media/minus.svg" class="icon-small"></img>
+                        </button>
+                    </li>
 
-                    <li class="instance-list-item">mastodon.social</li>
-                    <button>
-                        <img src="media/minus.svg" class="icon-small"></img>
-                    </button>
-
-                    <li class="instance-list-item">fosstodon.org</li><button>
-                        <img src="media/minus.svg" class="icon-small"></img>
-                    </button>
-
-                    <li class="instance-list-item">example.com</li>
-                    <button>
-                        <img src="media/minus.svg" class="icon-small"></img>
-                    </button>
-
-                    <li class="instances-reset-button"><button>Reset to default</button></li>
-                </ul>
-            </div>
-            <div>
-                <h2>Lemmy</h2>
-                <ul>
-                    <li><input type="text"></li><button>
-                        <img src="media/plus.svg" style="width: 24px; height: 24px;"></img>
-                    </button>
-                    <li class="instance-list-item">Instance 1</li><button>
-                        <img src="media/minus.svg" style="width: 24px; height: 24px;"></img>
-                    </button>
-                    <li class="instance-list-item">Instance 2</li><button>
-                        <img src="media/minus.svg" style="width: 24px; height: 24px;"></img>
-                    </button>
-                    <li class="instance-list-item">Instance 3</li><button>
-                        <img src="media/minus.svg" style="width: 24px; height: 24px;"></img>
-                    </button>
                     <li class="instances-reset-button"><button>Reset to default</button></li>
                 </ul>
             </div>

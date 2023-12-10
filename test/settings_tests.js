@@ -23,6 +23,8 @@ describe('Fetching instance lists', () => {
             list.forEach(url => assert.ok(settings.DEFAULT_LISTS[network].includes(url)));
         }
     });
+});
+describe('Removing instances', () => {
     it('Don\'t remove an instance that isn\'t there', () => {
         let success = settings.removeInstance('mastodon', 'ligma', mockStorage);
         let l2 = settings.fetchInstanceLists(mockStorage);
@@ -35,9 +37,11 @@ describe('Fetching instance lists', () => {
         assert.strictEqual(success, true);
         assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length-1);
     });
+});
+describe('Adding instances', () => {
     it('Reject a URL that doesn\'t fetch', async () => {
         let before = settings.fetchInstanceLists(mockStorage);
-        // ESLint says this await doesn't do anything, but it does.
+        // ESLint says these awaits don't do anything, but they do.
         let success = await settings.addInstance('lemmy', 'https://yeet.lmao', mockStorage);
         let after = settings.fetchInstanceLists(mockStorage);
         assert.strictEqual(success, false);
