@@ -1,5 +1,5 @@
 import "./entity/Post.js";
-import * as constant from "./entity/Constant.js"
+import * as constant from "./entity/Constant.js";
 import { PostFactory } from "./PostFactory.js";
 import { Post } from "./entity/Post.js";
 import { Paginator } from "./paginator.js";

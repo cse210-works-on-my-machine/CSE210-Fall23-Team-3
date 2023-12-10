@@ -1,3 +1,5 @@
+import "./entity/InstanceEntry.js"
+import { InstanceEntry } from "./entity/InstanceEntry.js";
 export const DEFAULT_LISTS = {
     mastodon:['https://mastodon.social', 'https://fosstodon.org'],
     lemmy:['https://lemmy.ml']

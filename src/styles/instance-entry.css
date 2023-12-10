@@ -1,0 +1,22 @@
+li {
+    padding-bottom: 5px;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 5px;
+}
+
+li button {
+    border-style: outset;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+li span {
+    background-color: lightgray;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

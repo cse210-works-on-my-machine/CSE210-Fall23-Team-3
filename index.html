@@ -26,28 +26,24 @@
             </button>
         </a>
     </header>
-
     <main id="featuredTagsPosts">
+        <template>
         <fedi-post author-image-url="https://cse.ucsd.edu/sites/default/files/faculty/powellF17-115x150.jpg"
             author-name="Thomas A. Powell" 
             author-handle="thomasapowell@fosstodon.org"
             content="React sucks. It completely ruins your response time. I mean come on guys. It's bonkers. What are we even doing here?"
             created-at="2023-11-30T10:00:00Z"></fedi-post>
+        </template>
     </main>
-
     <script type="module" src="src/scripts/index.js"></script>
     <footer>
-        <button class="page-button">
-            <img src="media/previous-page.svg" class="icon-small"/>
+        <button class="page-button" id="prev-page" type="button">
+            <img src="media/previous-page.svg" class="icon-small"></img>
         </button>
-        <span class="page-label">Page 2</span>
-        <button class="page-button">
-            <img src="media/next-page.svg" class="icon-small"/>
+        <span class="page-label" id="page-label">Page 2</span>
+        <button class="page-button" id="next-page" type="button">
+            <img src="media/next-page.svg" class="icon-small"></img>
         </button>
-    </footer>
-
-    
+    </footer> 
 </body>
 </html>
-
-
