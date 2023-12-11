@@ -41,40 +41,58 @@ function saveLists(instanceLists, storage) {
 
 /**
  * @param {string} network The name of the network (e.g. 'mastodon' or 'lemmy')
- * @param {*} url The URL of the instance to add.
- * @returns {boolean} True if the instance addition was successful, False otherwise
+ * @param {string} url The URL of the instance to add.
+ * @returns {Promise<boolean>} Promise which resolves to True if the instance addition was successful, False otherwise
  */
 export async function addInstance(network, url, storage = localStorage) {
     // TODO: move validation out of this function? (may separate concerns better)
     if (!(ALLOWED_NETWORKS.has(network)) || !validUrl(url)) return false;
-    try {
-        let response = await fetch(url);
-        if (response.status !== 200) return false;
-    } catch (_) {
-        return false;
-    }
+    // Commented out because this creates CORS errors if not done exactly on API
+    // try {
+    //     let response = await fetch(url);
+    //     if (response.status !== 200) return false;
+    // } catch (_) {
+    //     return false;
+    // }
     
     let instanceList = fetchInstanceLists(storage);
     // network is already guaranteed to be in ALLOWED_NETWORKS and thus on the default list
-    instanceList[network].push(url);
+    instanceList[network].unshift(url);
     storage.setItem(INST_LISTS, JSON.stringify(instanceList));
     return true;
 }
 
 /**
+ * Calls removeInstance -- if it's successful, remove corresponding element from UI.
+ * @param {string} network 
+ * @param {string} url 
+ * @param {Storage} storage 
+ */
+export function handleRemoveInstance(network, url, storage = localStorage) {
+    let i = removeInstance(network, url, storage);
+    if (i !== -1) {
+        let list = document.getElementById(`${network}-instance-list`);
+        // first child will always be add instance input box
+        // index 0 of instance list will be child 1
+        list.removeChild(list.children[i+1]);
+    }
+}
+/**
  * Removes an instance from localStorage. Currently O(n) with respect to number of instances.
  * @param {string} network 
  * @param {string} url
- * @returns {boolean} True if the removal was successful, false otherwise.
+ * @param {Storage} storage 
+ * @returns {number} Index removed if successful, -1 otherwise
  */
 export function removeInstance(network, url, storage = localStorage) {
     let instanceLists = fetchInstanceLists(storage);
     if (network in instanceLists && instanceLists[network].includes(url)) {
-        instanceLists[network].splice(instanceLists[network].indexOf(url),1);
+        let ind = instanceLists[network].indexOf(url);
+        instanceLists[network].splice(ind,1);
         saveLists(instanceLists, storage);
-        return true;
+        return ind;
     }
-    return false;
+    return -1;
 }
 
 /**
@@ -89,3 +107,27 @@ function validUrl(url) {
         return false;
     }
 }
+
+// Add event listners for add instance buttons.
+// Remove instance buttons handled by InstanceEntry.js
+let addInstBtns = Array.from(document.getElementsByClassName('add-instance-btn'));
+addInstBtns.forEach(element => {
+    element.addEventListener('click', async event => {
+        let btn = event.currentTarget;
+        let network = btn.getAttribute('data-network');
+        let input = document.getElementById(`${network}-add-instance`);
+        let url = input.value;
+        let success = await addInstance(network, input.value);
+        if (success) {
+            let newEntry = new InstanceEntry();
+            newEntry.network = network;
+            newEntry.url = url;
+            let list = document.getElementById(`${network}-instance-list`);
+            list.insertBefore(newEntry, list.children[1]);
+            input.value = ''; // clear input box after adding to UI
+        } else {
+            // TODO: don't use an alert
+            alert('Adding instance failed, please try again');
+        }
+    });
+});

@@ -40,22 +40,29 @@ export class InstanceEntry extends HTMLElement {
     // -- End of boilerplate
 
     render() {
-        // storage is hardcoded as localStorage for now, but class could be easily adapted to suit any Storage object
+        // storage is hardcoded as localStorage for now, but class could be easily adapted to suit any Storage object by adding a parameter to removeInstance
         this.shadowRoot.innerHTML = `
-        <script>
-            import { removeInstance } from "src/scripts/settings.js";
-
-            document.getElementById('instance-removal-button').addEventListener('click', () => removeInstance(${this.network}, ${this.url}));
-        </script>
+        
         <link rel="stylesheet" href="src/styles/instance-entry.css">
         <link rel="stylesheet" href="src/styles/common.css">
         <li>
             <span>${this.url}</span>
-            <button id="instance-removal-button">
+            <button id="instance-removal-button" onclick="handleRemoveInstance('${this.network}', '${this.url}')">
                 <img src="media/minus.svg" class="icon-small"></img>
             </button>
         </li>
         `;
+        let script = document.createElement('script');
+        script.type = 'module';
+        script.textContent = `
+        import { handleRemoveInstance } from './src/scripts/settings.js';
+        // document.getElementById('instance-removal-button').addEventListener('click', () => {
+        //     handleRemoveInstance(${this.network}, ${this.url});
+        //     console.log('removal button clicked');
+        // });
+        window.handleRemoveInstance = handleRemoveInstance;
+        `;
+        this.shadowRoot.appendChild(script);
     }
 }
 

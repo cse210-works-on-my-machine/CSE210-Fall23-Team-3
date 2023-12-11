@@ -39,14 +39,15 @@ describe('Removing instances', () => {
     });
 });
 describe('Adding instances', () => {
-    it('Reject a URL that doesn\'t fetch', async () => {
-        let before = settings.fetchInstanceLists(mockStorage);
-        // ESLint says these awaits don't do anything, but they do.
-        let success = await settings.addInstance('lemmy', 'https://yeet.lmao', mockStorage);
-        let after = settings.fetchInstanceLists(mockStorage);
-        assert.strictEqual(success, false);
-        assert.strictEqual(before['lemmy'].length, after['lemmy'].length);
-    });
+    // Commented out for now because fetch check in practice causes CORS errors if not directly on the API
+    // it('Reject a URL that doesn\'t fetch', async () => {
+    //     let before = settings.fetchInstanceLists(mockStorage);
+    //     // ESLint says these awaits don't do anything, but they do.
+    //     let success = await settings.addInstance('lemmy', 'https://yeet.lmao', mockStorage);
+    //     let after = settings.fetchInstanceLists(mockStorage);
+    //     assert.strictEqual(success, false);
+    //     assert.strictEqual(before['lemmy'].length, after['lemmy'].length);
+    // });
     it('Reject a malformed URL', async () => {
         let before = settings.fetchInstanceLists(mockStorage);
         let success = await settings.addInstance('lemmy', 'skidibibopmdada', mockStorage);

@@ -26,51 +26,29 @@
         <section class="instance-settings">
             <div>
                 <h2>Mastodon</h2>
-                <ul>
+                <ul id="mastodon-instance-list">
                     <li>
-                        <input type="text">
-                        <button>
+                        <input id="mastodon-add-instance" type="text">
+                        <button class="add-instance-btn" data-network="mastodon">
                             <img src="media/plus.svg" class="icon-small"></img>
                         </button>
                     </li>
-                    <li class="instance-list-item">
-                        <span>mastodon.social</span>
-                        <button>
-                            <img src="media/minus.svg" class="icon-small"></img>
-                        </button>
-                    </li>
-                    <li class="instance-list-item">
-                        <span>fosstodon.org</span>
-                        <button>
-                            <img src="media/minus.svg" class="icon-small"></img>
-                        </button>
-                    </li>
-                    <inst-entry url="fosstodon.org" network="mastodon"></inst-entry>
+                    <inst-entry url="https://mastodon.social" network="mastodon"></inst-entry>
+                    <inst-entry url="https://fosstodon.org" network="mastodon"></inst-entry>
 
                     <li class="instances-reset-button"><button>Reset to default</button></li>
                 </ul>
             </div>
             <div>
-                <h2>Mastodon</h2>
-                <ul>
+                <h2>Lemmy</h2>
+                <ul id="lemmy-instance-list">
                     <li>
-                        <input type="text">
-                        <button>
+                        <input id="lemmy-add-instance" type="text">
+                        <button class="add-instance-btn" data-network="lemmy">
                             <img src="media/plus.svg" class="icon-small"></img>
                         </button>
                     </li>
-                    <li class="instance-list-item">
-                        <span>mastodon.social</span>
-                        <button>
-                            <img src="media/minus.svg" class="icon-small"></img>
-                        </button>
-                    </li>
-                    <li class="instance-list-item">
-                        <span>fosstodon.org</span>
-                        <button>
-                            <img src="media/minus.svg" class="icon-small"></img>
-                        </button>
-                    </li>
+                    <inst-entry url="https://lemmy.ml" network="lemmy"></inst-entry>
 
                     <li class="instances-reset-button"><button>Reset to default</button></li>
                 </ul>
