@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import * as assert from 'assert';
-import * as settings from '../src/scripts/settings.js';
+import * as instanceList from '../src/scripts/instanceList.js';
 
 // Mock localStorage
 let mockStorage = {
@@ -17,23 +17,23 @@ let mockStorage = {
 };
 
 describe('Fetching instance lists', () => {
-    const lists = settings.fetchInstanceLists(mockStorage);
+    const lists = instanceList.fetchInstanceLists(mockStorage);
     it('Should return default lists', () => {
         for (let [network, list] of Object.entries(lists)) {
-            list.forEach(url => assert.ok(settings.DEFAULT_LISTS[network].includes(url)));
+            list.forEach(url => assert.ok(instanceList.DEFAULT_LISTS[network].includes(url)));
         }
     });
 });
 describe('Removing instances', () => {
     it('Don\'t remove an instance that isn\'t there', () => {
-        let success = settings.removeInstance('mastodon', 'ligma', mockStorage);
-        let l2 = settings.fetchInstanceLists(mockStorage);
+        let success = instanceList.removeInstance('mastodon', 'ligma', mockStorage);
+        let l2 = instanceList.fetchInstanceLists(mockStorage);
         assert.strictEqual(success, false);
         assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length);
     });
     it('Allows removal of a default instance', () => {
-        let success = settings.removeInstance('mastodon', settings.DEFAULT_LISTS['mastodon'][0], mockStorage);
-        let l2 = settings.fetchInstanceLists(mockStorage);
+        let success = instanceList.removeInstance('mastodon', instanceList.DEFAULT_LISTS['mastodon'][0], mockStorage);
+        let l2 = instanceList.fetchInstanceLists(mockStorage);
         assert.strictEqual(success, true);
         assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length-1);
     });
@@ -49,16 +49,16 @@ describe('Adding instances', () => {
     //     assert.strictEqual(before['lemmy'].length, after['lemmy'].length);
     // });
     it('Reject a malformed URL', async () => {
-        let before = settings.fetchInstanceLists(mockStorage);
-        let success = await settings.addInstance('lemmy', 'skidibibopmdada', mockStorage);
-        let after = settings.fetchInstanceLists(mockStorage);
+        let before = instanceList.fetchInstanceLists(mockStorage);
+        let success = await instanceList.addInstance('lemmy', 'skidibibopmdada', mockStorage);
+        let after = instanceList.fetchInstanceLists(mockStorage);
         assert.strictEqual(success, false);
         assert.strictEqual(before['lemmy'].length, after['lemmy'].length);
     });
     it('Accept a good URL', async () => {
-        let before = settings.fetchInstanceLists(mockStorage);
-        let success = await settings.addInstance('lemmy', 'https://mtgzone.com', mockStorage);
-        let after = settings.fetchInstanceLists(mockStorage);
+        let before = instanceList.fetchInstanceLists(mockStorage);
+        let success = await instanceList.addInstance('lemmy', 'https://mtgzone.com', mockStorage);
+        let after = instanceList.fetchInstanceLists(mockStorage);
         assert.strictEqual(success, true);
         assert.strictEqual(before['lemmy'].length+1, after['lemmy'].length);
     });
