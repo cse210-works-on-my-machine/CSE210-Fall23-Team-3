@@ -4,3 +4,4 @@
 3. Give earliest possible notice when unable to attend a meeting, and read meeting minutes afterwards.
 4. Check Slack at least once a day and be responsive to pings.
 5. Respectful debate of design decisions is encouraged, but as a last resort will be arbitrated by a plurality vote. 
+6. Strive for quality over quantity of features at all times.
