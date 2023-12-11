@@ -35,7 +35,7 @@ export function fetchInstanceLists(storage = localStorage) {
  * @param {Object} instanceLists An object, should be pairs of network names and URL string arrays
  * @param {*} storage The storage object to write to with the key 'instanceLists'
  */
-function saveLists(instanceLists, storage) {
+function saveLists(instanceLists, storage=localStorage) {
     storage.setItem(INST_LISTS, JSON.stringify(instanceLists))
 }
 
@@ -107,6 +107,19 @@ function validUrl(url) {
         return false;
     }
 }
+// Populate instance lists onto UI
+let instLists = fetchInstanceLists();
+for (let network of ALLOWED_NETWORKS) {
+    let parent = document.getElementById(`${network}-instance-list`);
+    let listBottom = parent.querySelector('.instances-reset-button');
+    // not iterating
+    instLists[network].forEach(url => {
+        let newEntry = new InstanceEntry();
+        newEntry.network = network;
+        newEntry.url = url;
+        parent.insertBefore(newEntry, listBottom);
+    });
+}
 
 // Add event listners for add instance buttons.
 // Remove instance buttons handled by InstanceEntry.js
@@ -129,5 +142,18 @@ addInstBtns.forEach(element => {
             // TODO: don't use an alert
             alert('Adding instance failed, please try again');
         }
+    });
+});
+
+// Add event listeners for "reset to default"
+// TODO: refactor classes to "button" or "btn". choose one
+let resetDefaultBtns = Array.from(document.getElementsByClassName('instances-reset-button'));
+resetDefaultBtns.forEach(element => {
+    element.addEventListener('click', event => {
+        let network = event.currentTarget.getAttribute('data-network');
+        let instanceLists = fetchInstanceLists();
+        instanceLists[network] = DEFAULT_LISTS[network];
+        saveLists(instanceLists);
+        location.reload();
     });
 });
