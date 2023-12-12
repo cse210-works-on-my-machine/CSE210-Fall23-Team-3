@@ -21,18 +21,33 @@ export async function buildPage(HANDLERS) {
 
     // TODO: blend posts from different instances together rather than having them back to back
     // TODO: sane pre-fetching solution that isn't just one instance
-    let posts = [];
+    let postsByNetwork = {};
+    let maxLengthArray = 0;
     const instLists = fetchInstanceLists();
     for (let [network, instanceList] of Object.entries(instLists)) {
         let fetcher = new HANDLERS[network]["fetcher"]();
         let postBuilder = new HANDLERS[network]["postBuilder"]();
+        postsByNetwork[network] = [];
         for (let url of instanceList) {
             let res = await fetcher.fetchPosts(url);
             for (let post of res) {
-                posts.push(postBuilder.buildPost(post));
+                postsByNetwork[network].push(postBuilder.buildPost(post));
+            }
+        }
+        maxLengthArray = Math.max(maxLengthArray, postsByNetwork[network].length);
+    }
+    console.log(postsByNetwork);
+    console.log(maxLengthArray);
+
+    let posts = [];
+    for (let i = 0; i < maxLengthArray; i++) {
+        for (let [network, _] of Object.entries(instLists)) {
+            if (i < postsByNetwork[network].length) {
+                posts.push(postsByNetwork[network][i]);
             }
         }
     }
+    console.log(posts);
 
     const paginator = new Paginator(posts, 10);
 
