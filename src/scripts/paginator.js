@@ -32,6 +32,9 @@ export class Paginator {
 
         // Update the page number
         document.getElementById("page-label").innerHTML = "Page " + this.currentPage;
+
+        // Scroll to top of page once displayed
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     /**
