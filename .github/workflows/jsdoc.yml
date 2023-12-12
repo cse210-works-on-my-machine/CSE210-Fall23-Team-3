@@ -34,6 +34,7 @@ jobs:
           files_yaml: |
             nondoc:
               - '!docs/**'
+              - 'src/**'
 
       - name: Set up Node.js
         if: steps.changed-files-yaml.outputs.nondoc_any_changed == 'true'
