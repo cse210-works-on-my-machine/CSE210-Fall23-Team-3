@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "cse210 final project for team 3",
   "scripts": {
-    "coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.txt",
+    "coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info",
     "generate-docs": "jsdoc -c jsdoc.json",
     "test": "node --test --experimental-test-coverage"
   },
