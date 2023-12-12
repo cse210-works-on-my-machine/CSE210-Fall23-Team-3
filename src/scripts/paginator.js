@@ -1,5 +1,8 @@
 import { Post } from "./entity/Post.js";
 
+const nextPage = document.getElementById("next-page");
+const prevPage = document.getElementById("prev-page");
+
 export class Paginator {
     /**
      *
@@ -10,10 +13,9 @@ export class Paginator {
         this.items = items;
         this.itemsPerPage = itemsPerPage;
         this.currentPage = 1;
+        this.numPages = Math.ceil(this.items.length / this.itemsPerPage);
         this.displayPage();
 
-        const nextPage = document.getElementById("next-page");
-        const prevPage = document.getElementById("prev-page");
         nextPage.addEventListener("click", function () {
             this.nextPage();
         }.bind(this));
@@ -35,7 +37,8 @@ export class Paginator {
         document.getElementById("featuredTagsPosts").innerHTML = "";
 
         const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-        const endIndex = startIndex + this.itemsPerPage;
+        // End index is start + items, unless that would be over the end!
+        const endIndex = (startIndex + this.itemsPerPage <= this.items.length) ? startIndex + this.itemsPerPage : this.items.length;
 
         // Display the items for the current page
         const posts = this.items.slice(startIndex, endIndex);
@@ -43,8 +46,23 @@ export class Paginator {
             document.getElementById("featuredTagsPosts").appendChild(post);
         });
 
+        // Hide page buttons if they aren't usable
+        if (this.currentPage === 1) {
+            prevPage.style.visibility = "hidden";
+        }
+        else {
+            prevPage.style.visibility = "visible";
+        }
+
+        if (this.currentPage == this.numPages) {
+            nextPage.style.visibility = "hidden";
+        }
+        else {
+            nextPage.style.visibility = "visible";
+        }
+
         // Update the page number
-        document.getElementById("page-label").innerHTML = "Page " + this.currentPage;
+        document.getElementById("page-label").innerHTML = "Page " + this.currentPage + " of " + this.numPages;
     }
 
     /**
