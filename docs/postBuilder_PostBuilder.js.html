@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Interface: Display</title>
+    <title>JSDoc: Source: postBuilder/PostBuilder.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,97 +17,33 @@
 
 <div id="main">
 
-    <h1 class="page-title">Interface: Display</h1>
+    <h1 class="page-title">Source: postBuilder/PostBuilder.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2>Display</h2>
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @interface
+ * Display class that will be subclassed by the different Displays
+ */
+export class PostBuilder {
+    constructor(){
+    }
 
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="postBuilder_PostBuilder.js.html">postBuilder/PostBuilder.js</a>, <a href="postBuilder_PostBuilder.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    /**
+     * @param {Object} rawPost - The raw json data from the API
+     */
+    buildPost(rawPost){
+        throw new Error("Not implemented - You must implement displayPost() in a subclass");
+    }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

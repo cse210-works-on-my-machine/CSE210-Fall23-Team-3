@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Interface: Display</title>
+    <title>JSDoc: Source: postBuilder/MastodonPostBuilder.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,97 +17,54 @@
 
 <div id="main">
 
-    <h1 class="page-title">Interface: Display</h1>
+    <h1 class="page-title">Source: postBuilder/MastodonPostBuilder.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2>Display</h2>
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { PostBuilder } from "./PostBuilder.js"
 
-<article>
-    <div class="container-overview">
-    
-        
+export class MastodonPostBuilder extends PostBuilder {
+   
+    // TODO: review this function, remove if not needed
+    #interleaveArrays(responses) {
+        const maxLength = Math.max(...responses.map(response => response.length));
+        const result = [];
+      
+        for (let i = 0; i &lt; maxLength; i++) {
+          for (let j = 0; j &lt; responses.length; j++) {
+            if (responses[j].length > i) {
+              result.push(responses[j][i]);
+            }
+          }
+        }
+      
+        return result;
+    }
 
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="postBuilder_PostBuilder.js.html">postBuilder/PostBuilder.js</a>, <a href="postBuilder_PostBuilder.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    /**
+     * 
+     * @param {Object} rawPost - The raw json data from the API
+     * @returns {Post} A new Post element created from raw json data from the API
+     */
+    buildPost(rawPost) {
+        const newPost = document.createElement("fedi-post");
+        newPost.setAttribute('id', rawPost.id);
+        newPost.setAttribute('content', rawPost.content);
+        newPost.setAttribute('author-name', rawPost.account.username);
+        newPost.setAttribute('created-at', rawPost.created_at);
+        newPost.setAttribute('author-image-url', rawPost.account.avatar);
+        newPost.setAttribute('author-handle', rawPost.account.acct);
+        return newPost;
+    }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

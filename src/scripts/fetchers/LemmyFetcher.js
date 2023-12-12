@@ -2,16 +2,17 @@ import * as constant from "../entity/Constant.js";
 import { Fetcher } from "./Fetcher.js";
 
 const NUM_POSTS = 50;
+const API_V3 = '/api/v3/post/list?sort=Hot'
 
 export class LemmyFetcher extends Fetcher {
     /**
-     * 
+     * @param {string} instanceUrl - The base url of the Lemmy instance's API
      * @returns {Promise<Array>} - A promise that resolves to an array of raw posts from the API
      */
-    async fetchPosts() {
+    async fetchPosts(instanceUrl) {
         const posts = [];
         try {
-            const url = constant.LEMMY_TRENDING_POSTS + "&limit=" + NUM_POSTS;
+            const url = instanceUrl + API_V3 +  "&limit=" + NUM_POSTS;
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
