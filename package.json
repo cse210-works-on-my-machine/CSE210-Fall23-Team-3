@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "cse210 final project for team 3",
   "scripts": {
-    "test": "node --test --experimental-test-coverage",
-    "generate-docs": "jsdoc -c jsdoc.json"
+    "coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info",
+    "generate-docs": "jsdoc -c jsdoc.json",
+    "test": "node --test --experimental-test-coverage"
+  },
+  "engines": {
+    "node": ">21.0.0"
   },
   "author": "",
   "license": "ISC",
