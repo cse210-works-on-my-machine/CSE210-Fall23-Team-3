@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Interface: Display</title>
+    <title>JSDoc: Source: fetchers/LemmyFetcher.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,97 +17,49 @@
 
 <div id="main">
 
-    <h1 class="page-title">Interface: Display</h1>
+    <h1 class="page-title">Source: fetchers/LemmyFetcher.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2>Display</h2>
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import * as constant from "../entity/Constant.js";
+import { Fetcher } from "./Fetcher.js";
 
-<article>
-    <div class="container-overview">
-    
-        
+const NUM_POSTS = 50;
+const API_V3 = '/api/v3/post/list?sort=Hot'
 
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="postBuilder_PostBuilder.js.html">postBuilder/PostBuilder.js</a>, <a href="postBuilder_PostBuilder.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+export class LemmyFetcher extends Fetcher {
+    /**
+     * @param {string} instanceUrl - The base url of the Lemmy instance's API
+     * @returns {Promise&lt;Array>} - A promise that resolves to an array of raw posts from the API
+     */
+    async fetchPosts(instanceUrl) {
+        const posts = [];
+        try {
+            const url = instanceUrl + API_V3 +  "&amp;limit=" + NUM_POSTS;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            let response_data = await response.json();
+            const posts_json = response_data.posts;
+            posts_json.forEach(post => {
+                posts.push(post);
+            });
+            return posts;
+        } catch (error) {
+            console.error(`Failed to fetch trending posts:`, error);
+            return null;
+        }
+    }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 
