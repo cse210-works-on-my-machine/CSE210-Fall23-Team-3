@@ -62,41 +62,9 @@ export class Post extends HTMLElement {
         this.setAttribute('author-handle', value);
     }
 
-
     render() {
         this.shadowRoot.innerHTML = `
-            <style>
-                :host {
-                    width: 80%;
-                    display: grid;
-                    grid-template-columns: auto 1fr;
-                    grid-template-rows: max-content max-content max-content;
-                    gap: 1em;
-                    padding-bottom: 1em;
-                    padding-top: 1em;
-                }
-
-                .post-header {
-                    display: flex;
-                    align-items: center
-                }
-                
-                picture {
-                    width: max-content;
-                    height: max-content;
-                }
-
-                picture img{
-                    width: 100px;
-                    height: 100px;
-                    border: inset;
-                }
-
-                .post-content {
-                    grid-column: span 2;
-                }
-
-            </style>
+            <link rel="stylesheet" href="src/styles/post-element.css">
             <picture>
                 <img src=${this.authorImageURL}></img>
             </picture>

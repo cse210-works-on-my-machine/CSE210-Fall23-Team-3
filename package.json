@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "cse210 final project for team 3",
   "scripts": {
-    "test": "node --test",
+    "test": "node --test --experimental-test-coverage",
     "generate-docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
@@ -13,6 +13,10 @@
     "jsdoc": "^4.0.2"
   },
   "dependencies": {
-    "@stylistic/eslint-plugin": "^1.4.1"
-  }
+    "@stylistic/eslint-plugin": "^1.4.1",
+    "jsdom": "^23.0.1",
+    "node-fetch": "^3.3.2",
+    "sinon": "^17.0.1"
+  },
+  "type": "module"
 }

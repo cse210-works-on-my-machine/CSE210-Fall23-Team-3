@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/styles/common.css">
+    <link rel="stylesheet" href="src/styles/settings.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <title>Blend | What's happening across the Fediverse</title>
+</head>
+<body>
+    <header>
+        <h1>B L E N D</h1>
+        <div class="flex-spacer"></div>
+        <a href="index.html">
+            <button>
+                <img src="media/feed.svg" class="icon-large"></img>
+            </button>
+        </a>
+    </header>
+    <main>
+        <h1>Instances</h1>
+        <section class="instance-settings">
+            <div>
+                <h2>Mastodon</h2>
+                <ul id="mastodon-instance-list">
+                    <li>
+                        <input id="mastodon-add-instance" type="text">
+                        <button class="add-instance-btn" data-network="mastodon">
+                            <img src="media/plus.svg" class="icon-small"></img>
+                        </button>
+                    </li>
+
+                    <li class="instances-reset-button" data-network="mastodon"><button>Reset to default</button></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Lemmy</h2>
+                <ul id="lemmy-instance-list">
+                    <li>
+                        <input id="lemmy-add-instance" type="text">
+                        <button class="add-instance-btn" data-network="lemmy">
+                            <img src="media/plus.svg" class="icon-small"></img>
+                        </button>
+                    </li>
+
+                    <li class="instances-reset-button" data-network="lemmy"><button>Reset to default</button></li>
+                </ul>
+            </div>
+        </section>
+        <h1>Appearance</h1>
+        <section>
+            <div>
+                <label for="themes">Theme:</label>
+                <select name="themes" id="themes" >
+                    <option>Default Light</option>
+                    <option>Default Dark</option>
+                    <option>Retro Light</option>
+                    <option>Retro Dark</option>
+                </select>
+            </div>
+        </section>
+        
+    </main>
+    
+    <footer>
+        Created by [names here], copyright LOLOLOL
+    </footer>
+    <script type="module" src="./src/scripts/settings-page.js"></script>
+</body>
+</html>
+
+
