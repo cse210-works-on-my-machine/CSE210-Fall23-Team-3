@@ -30,6 +30,7 @@ export class MastodonPostBuilder extends PostBuilder {
         newPost.setAttribute("created-at", rawPost.created_at);
         newPost.setAttribute("author-image-url", rawPost.account.avatar);
         newPost.setAttribute("author-handle", rawPost.account.acct);
+        newPost.setAttribute("direct-url", rawPost.url);
         return newPost;
     }
 }

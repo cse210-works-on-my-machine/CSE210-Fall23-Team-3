@@ -62,6 +62,15 @@ export class Post extends HTMLElement {
         this.setAttribute("author-handle", value);
     }
 
+    // Getter and Setter for direct-url
+    get directURL() {
+        return this.getAttribute("direct-url");
+    }
+
+    set directURL(value) {
+        this.setAttribute("direct-url", value);
+    }
+
     render() {
         if (this.authorImageURL == undefined) {
             this.setAttribute("author-image-url", "media/person.svg");
@@ -72,7 +81,8 @@ export class Post extends HTMLElement {
                 <img src=${this.authorImageURL}></img>
             </picture>
             <h2 class="post-header">${this.authorName}</h2>
-            <time>${this.createdAt}</time> <span>${this.authorHandle}</span>
+            <a target="_blank" href=${this.directURL}><time datetime=${this.createdAt}>${(new Date(this.createdAt)).toLocaleString()}</time></a>
+            <span>${this.authorHandle}</span>
             <div class="post-content">${this.content}</div>
         `;
     }

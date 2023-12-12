@@ -27,6 +27,7 @@ export class LemmyPostBuilder extends PostBuilder {
             newPost.setAttribute("author-image-url", post.creator.avatar);
         }
         newPost.setAttribute("author-handle", this.#extractAuthorHandle(post));
+        newPost.setAttribute("direct-url", post.post.ap_id);
         return newPost;
     }
 
