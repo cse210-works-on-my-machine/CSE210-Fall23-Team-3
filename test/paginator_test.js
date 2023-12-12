@@ -73,7 +73,7 @@ describe("Paginator", () => {
             // Should display the first two posts
             let featuredTagsPosts = document.getElementById("featuredTagsPosts");
             assert.strictEqual(featuredTagsPosts.children.length, 2);
-            assert.strictEqual(pageLabel.innerHTML, "Page 1");
+            assert.strictEqual(pageLabel.innerHTML, "Page 1 of 2");
         });
     });
 
@@ -100,7 +100,7 @@ describe("Paginator", () => {
         // Should display the next two posts (well actually one since length is 3)
         paginator.nextPage();
         assert.strictEqual(featuredTagsPosts.children.length, 1);
-        assert.strictEqual(pageLabel.innerHTML, "Page 2");
+        assert.strictEqual(pageLabel.innerHTML, "Page 2 of 2");
     });
 
     it("should stay at page 1 when prevPage() is called at page 1", async function () {
@@ -126,7 +126,7 @@ describe("Paginator", () => {
         // Should stay at page 1
         paginator.prevPage();
         assert.strictEqual(featuredTagsPosts.children.length, 2);
-        assert.strictEqual(pageLabel.innerHTML, "Page 1");
+        assert.strictEqual(pageLabel.innerHTML, "Page 1 of 2");
     });
 
     it("shuld display page 1 when prevPage() is called at page 2", async function () {
@@ -152,11 +152,11 @@ describe("Paginator", () => {
         // Should display the next two posts (well actually one since length is 3)
         paginator.nextPage();
         assert.strictEqual(featuredTagsPosts.children.length, 1);
-        assert.strictEqual(pageLabel.innerHTML, "Page 2");
+        assert.strictEqual(pageLabel.innerHTML, "Page 2 of 2");
 
         // Should display the first two posts
         paginator.prevPage();
         assert.strictEqual(featuredTagsPosts.children.length, 2);
-        assert.strictEqual(pageLabel.innerHTML, "Page 1");
+        assert.strictEqual(pageLabel.innerHTML, "Page 1 of 2");
     });
 });
