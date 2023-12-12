@@ -23,7 +23,9 @@ export class LemmyPostBuilder extends PostBuilder {
         newPost.setAttribute("content", this.#extractPostContent(post.post)); // Either a url or body or both.
         newPost.setAttribute("author-name", post.creator.name);
         newPost.setAttribute("created-at", post.post.published);
-        newPost.setAttribute("author-image-url", post.creator.avatar);
+        if (post.creator.avatar != undefined) {
+            newPost.setAttribute("author-image-url", post.creator.avatar);
+        }
         newPost.setAttribute("author-handle", this.#extractAuthorHandle(post));
         return newPost;
     }

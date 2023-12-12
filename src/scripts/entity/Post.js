@@ -63,6 +63,9 @@ export class Post extends HTMLElement {
     }
 
     render() {
+        if (this.authorImageURL == undefined) {
+            this.setAttribute("author-image-url", "media/person.svg");
+        }
         this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="src/styles/post-element.css">
             <picture>
