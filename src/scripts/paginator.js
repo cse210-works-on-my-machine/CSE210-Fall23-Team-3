@@ -18,6 +18,9 @@ export class Paginator {
      * Display the page of items
      */
     displayPage() {
+        // Scroll to top of page once displayed
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
         // Clear the container
         document.getElementById("featuredTagsPosts").innerHTML = "";
 
@@ -32,9 +35,6 @@ export class Paginator {
 
         // Update the page number
         document.getElementById("page-label").innerHTML = "Page " + this.currentPage;
-
-        // Scroll to top of page once displayed
-        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     /**
