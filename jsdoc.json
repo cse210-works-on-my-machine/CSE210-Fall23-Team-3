@@ -16,7 +16,7 @@
       },
       "systemName": "CSE 210 Project Documentation",
       "footer": "Copyright 2023 Works On My Machine",
-      "includeDate": true
+      "includeDate": false
     },
     "opts": {
       "encoding": "utf8",

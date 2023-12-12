@@ -3,7 +3,7 @@
  * Fetcher class that will be subclassed by the different fetchers
  */
 export class Fetcher {
-    constructor(){
+    constructor() {
     }
 
     async fetchPosts(instanceUrl) {
