@@ -1,10 +1,10 @@
 export const DEFAULT_LISTS = {
-    mastodon:['https://mastodon.social', 'https://fosstodon.org'],
-    lemmy:['https://lemmy.ml']
-}
+    mastodon: ["https://mastodon.social", "https://fosstodon.org"],
+    lemmy: ["https://lemmy.ml"],
+};
 
-const INST_LISTS = 'instanceLists';
-const ALLOWED_NETWORKS = new Set(['mastodon', 'lemmy']);
+const INST_LISTS = "instanceLists";
+const ALLOWED_NETWORKS = new Set(["mastodon", "lemmy"]);
 
 /**
  * Loads hardcoded default instance lists into localStorage.
@@ -33,8 +33,8 @@ export function fetchInstanceLists(storage = localStorage) {
  * @param {Object} instanceLists An object, should be pairs of network names and URL string arrays
  * @param {*} storage The storage object to write to with the key 'instanceLists'
  */
-export function saveLists(instanceLists, storage=localStorage) {
-    storage.setItem(INST_LISTS, JSON.stringify(instanceLists))
+export function saveLists(instanceLists, storage = localStorage) {
+    storage.setItem(INST_LISTS, JSON.stringify(instanceLists));
 }
 
 /**
@@ -52,7 +52,7 @@ export async function addInstance(network, url, storage = localStorage) {
     // } catch (_) {
     //     return false;
     // }
-    
+
     let instanceList = fetchInstanceLists(storage);
     // network is already guaranteed to be in ALLOWED_NETWORKS and thus on the default list
     instanceList[network].unshift(url);
@@ -62,9 +62,9 @@ export async function addInstance(network, url, storage = localStorage) {
 
 /**
  * Calls removeInstance -- if it's successful, remove corresponding element from UI.
- * @param {string} network 
- * @param {string} url 
- * @param {Storage} storage 
+ * @param {string} network
+ * @param {string} url
+ * @param {Storage} storage
  */
 export function handleRemoveInstance(network, url, storage = localStorage) {
     let i = removeInstance(network, url, storage);
@@ -72,21 +72,21 @@ export function handleRemoveInstance(network, url, storage = localStorage) {
         let list = document.getElementById(`${network}-instance-list`);
         // first child will always be add instance input box
         // index 0 of instance list will be child 1
-        list.removeChild(list.children[i+1]);
+        list.removeChild(list.children[i + 1]);
     }
 }
 /**
  * Removes an instance from localStorage. Currently O(n) with respect to number of instances.
- * @param {string} network 
+ * @param {string} network
  * @param {string} url
- * @param {Storage} storage 
+ * @param {Storage} storage
  * @returns {number} Index removed if successful, -1 otherwise
  */
 export function removeInstance(network, url, storage = localStorage) {
     let instanceLists = fetchInstanceLists(storage);
     if (network in instanceLists && instanceLists[network].includes(url)) {
         let ind = instanceLists[network].indexOf(url);
-        instanceLists[network].splice(ind,1);
+        instanceLists[network].splice(ind, 1);
         saveLists(instanceLists, storage);
         return ind;
     }
@@ -101,7 +101,8 @@ function validUrl(url) {
     try {
         new URL(url);
         return true;
-    } catch {
+    }
+    catch {
         return false;
     }
 }

@@ -6,7 +6,7 @@
 export class InstanceEntry extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.attachShadow({ mode: "open" });
     }
 
     connectedCallback() {
@@ -15,27 +15,27 @@ export class InstanceEntry extends HTMLElement {
 
     // Glorious boilerplate for tag attributes
     get id() {
-        return this.getAttribute('id');
+        return this.getAttribute("id");
     }
 
     set id(value) {
-        this.setAttribute('id', value);
+        this.setAttribute("id", value);
     }
 
     get url() {
-        return this.getAttribute('url');
+        return this.getAttribute("url");
     }
-    
+
     set url(value) {
-        this.setAttribute('url', value);
+        this.setAttribute("url", value);
     }
 
     get network() {
-        return this.getAttribute('network');
+        return this.getAttribute("network");
     }
 
     set network(value) {
-        this.setAttribute('network', value);
+        this.setAttribute("network", value);
     }
     // -- End of boilerplate
 
@@ -52,8 +52,8 @@ export class InstanceEntry extends HTMLElement {
             </button>
         </li>
         `;
-        let script = document.createElement('script');
-        script.type = 'module';
+        let script = document.createElement("script");
+        script.type = "module";
         script.textContent = `
         import { handleRemoveInstance } from './src/scripts/instanceList.js';
         // document.getElementById('instance-removal-button').addEventListener('click', () => {
@@ -66,4 +66,4 @@ export class InstanceEntry extends HTMLElement {
     }
 }
 
-customElements.define('inst-entry', InstanceEntry);
+customElements.define("inst-entry", InstanceEntry);

@@ -1,35 +1,35 @@
-import { PostBuilder } from "./PostBuilder.js"
+import { PostBuilder } from "./PostBuilder.js";
 
-export class LemmyPostBuilder extends PostBuilder{
+export class LemmyPostBuilder extends PostBuilder {
     /**
-     * 
+     *
      * @param {HTMLElement} container - "featuredTagsPosts"
      * @param {Array<Object>} posts - array of raw post objects
      */
     displayPosts(container, posts) {
-        posts.forEach(post => {
-            container.appendChild(this.buildPost(post))
+        posts.forEach((post) => {
+            container.appendChild(this.buildPost(post));
         });
     }
 
     /**
-     * 
+     *
      * @param {Object} post - raw post object from the API
      * @returns {Object}- A Post element created from raw json data from the API
      */
     buildPost(post) {
         let newPost = document.createElement("fedi-post");
-        newPost.setAttribute('id', post.post.id);
-        newPost.setAttribute('content', this.#extractPostContent(post.post)); // Either a url or body or both. 
-        newPost.setAttribute('author-name', post.creator.name);
-        newPost.setAttribute('created-at', post.post.published);
-        newPost.setAttribute('author-image-url', post.creator.avatar);
-        newPost.setAttribute('author-handle', this.#extractAuthorHandle(post));
+        newPost.setAttribute("id", post.post.id);
+        newPost.setAttribute("content", this.#extractPostContent(post.post)); // Either a url or body or both.
+        newPost.setAttribute("author-name", post.creator.name);
+        newPost.setAttribute("created-at", post.post.published);
+        newPost.setAttribute("author-image-url", post.creator.avatar);
+        newPost.setAttribute("author-handle", this.#extractAuthorHandle(post));
         return newPost;
     }
 
     /**
-     * 
+     *
      * @param {Object} post - Json object from the API
      * @returns {string} - The content of the post
      */
@@ -41,13 +41,13 @@ export class LemmyPostBuilder extends PostBuilder{
         if ("url" in post) {
             content = content.concat("\nURL: ", post.url);
         }
-        return content;    
+        return content;
     }
 
     /**
-     * 
+     *
      * @param {Object} post - Json object from the API
-     * @returns {string} - The author's handle or an empty string if not found 
+     * @returns {string} - The author's handle or an empty string if not found
      */
     #extractAuthorHandle(post) {
         if ("creator" in post) {

@@ -2,7 +2,7 @@ import { Post } from "./entity/Post.js";
 
 export class Paginator {
     /**
-     * 
+     *
      * @param {Array<Post>} items - The array of items to paginate
      * @param {number} itemsPerPage - The number of items per page
      */
@@ -14,11 +14,10 @@ export class Paginator {
     }
 
     /**
-     * 
+     *
      * Display the page of items
      */
     displayPage() {
-
         // Clear the container
         document.getElementById("featuredTagsPosts").innerHTML = "";
 
@@ -27,13 +26,12 @@ export class Paginator {
 
         // Display the items for the current page
         const posts = this.items.slice(startIndex, endIndex);
-        posts.forEach(post => {
+        posts.forEach((post) => {
             document.getElementById("featuredTagsPosts").appendChild(post);
         });
 
         // Update the page number
         document.getElementById("page-label").innerHTML = "Page " + this.currentPage;
-
     }
 
     /**
@@ -48,9 +46,8 @@ export class Paginator {
      * Set the current page to the previous page and display it. If current page is 1, do nothing.
      */
     prevPage() {
-        if(this.currentPage === 1) return;
+        if (this.currentPage === 1) return;
         this.currentPage--;
         this.displayPage();
     }
-
 }

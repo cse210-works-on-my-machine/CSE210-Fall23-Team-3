@@ -6,7 +6,8 @@
     },
     "extends": [ "plugin:@stylistic/recommended-extends", "eslint:recommended" ],
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
     "plugins": [
         "@stylistic/eslint-plugin"

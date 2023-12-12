@@ -1,7 +1,7 @@
 export class Post extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.attachShadow({ mode: "open" });
     }
 
     connectedCallback() {
@@ -10,56 +10,56 @@ export class Post extends HTMLElement {
 
     // Getter and Setter for id
     get id() {
-        return this.getAttribute('id');
+        return this.getAttribute("id");
     }
 
     set id(value) {
-        this.setAttribute('id', value);
+        this.setAttribute("id", value);
     }
 
     // Getter and Setter for content
     get content() {
-        return this.getAttribute('content');
+        return this.getAttribute("content");
     }
 
     set content(value) {
-        this.setAttribute('content', value);
+        this.setAttribute("content", value);
     }
 
     // Getter and Setter for authorName
     get authorName() {
-        return this.getAttribute('author-name');
+        return this.getAttribute("author-name");
     }
 
     set authorName(value) {
-        this.setAttribute('author-name', value);
+        this.setAttribute("author-name", value);
     }
 
     // Getter and Setter for createdAt
     get createdAt() {
-        return this.getAttribute('created-at');
+        return this.getAttribute("created-at");
     }
 
     set createdAt(value) {
-        this.setAttribute('created-at', value);
+        this.setAttribute("created-at", value);
     }
 
     // Getter and Setter for authorImageURL
     get authorImageURL() {
-        return this.getAttribute('author-image-url');
+        return this.getAttribute("author-image-url");
     }
 
     set authorImageURL(value) {
-        this.setAttribute('author-image-url', value);
+        this.setAttribute("author-image-url", value);
     }
 
     // Getter and Setter for authorHandle
     get authorHandle() {
-        return this.getAttribute('author-handle');
+        return this.getAttribute("author-handle");
     }
 
     set authorHandle(value) {
-        this.setAttribute('author-handle', value);
+        this.setAttribute("author-handle", value);
     }
 
     render() {
@@ -75,4 +75,4 @@ export class Post extends HTMLElement {
     }
 }
 
-customElements.define('fedi-post', Post);
+customElements.define("fedi-post", Post);

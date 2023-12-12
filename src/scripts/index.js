@@ -12,9 +12,9 @@ const nextPage = document.getElementById("next-page");
 const prevPage = document.getElementById("prev-page");
 
 const HANDLERS = {
-    lemmy: {fetcher: LemmyFetcher, postBuilder: LemmyPostBuilder},
-    mastodon: {fetcher: MastodonFetcher, postBuilder: MastodonPostBuilder}
-}
+    lemmy: { fetcher: LemmyFetcher, postBuilder: LemmyPostBuilder },
+    mastodon: { fetcher: MastodonFetcher, postBuilder: MastodonPostBuilder },
+};
 
 let currentPage = 1;
 
@@ -29,26 +29,25 @@ let paginator = null;
  */
 let posts = [];
 
-nextPage.addEventListener("click", function() {
+nextPage.addEventListener("click", function () {
     paginator.nextPage();
 });
 
-prevPage.addEventListener("click", function() {
+prevPage.addEventListener("click", function () {
     paginator.prevPage();
 });
 
-document.addEventListener("DOMContentLoaded", async function() {
-
+document.addEventListener("DOMContentLoaded", async function () {
     // Disable the next and previous buttons until the first instance is loaded
     nextPage.disabled = true;
     prevPage.disabled = true;
-    
+
     // TODO: blend posts from different instances together rather than having them back to back
     // TODO: sane pre-fetching solution that isn't just one instance
     const instLists = fetchInstanceLists();
     for (let [network, instanceList] of Object.entries(instLists)) {
-        let fetcher = new HANDLERS[network]['fetcher']();
-        let postBuilder = new HANDLERS[network]['postBuilder']();
+        let fetcher = new HANDLERS[network]["fetcher"]();
+        let postBuilder = new HANDLERS[network]["postBuilder"]();
         for (let url of instanceList) {
             let res = await fetcher.fetchPosts(url);
             for (let post of res) {
@@ -62,8 +61,4 @@ document.addEventListener("DOMContentLoaded", async function() {
     // Enable the next and previous buttons after the first instance is loaded
     nextPage.disabled = false;
     prevPage.disabled = false;
-
 });
-
-
-
