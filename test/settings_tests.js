@@ -15,9 +15,8 @@ let mockStorage = {
         this.store = {};
     }
 };
-
+const lists = instanceList.fetchInstanceLists(mockStorage);
 describe('Fetching instance lists', () => {
-    const lists = instanceList.fetchInstanceLists(mockStorage);
     it('Should return default lists', () => {
         for (let [network, list] of Object.entries(lists)) {
             list.forEach(url => assert.ok(instanceList.DEFAULT_LISTS[network].includes(url)));
@@ -26,15 +25,15 @@ describe('Fetching instance lists', () => {
 });
 describe('Removing instances', () => {
     it('Don\'t remove an instance that isn\'t there', () => {
-        let success = instanceList.removeInstance('mastodon', 'ligma', mockStorage);
+        let ind = instanceList.removeInstance('mastodon', 'ligma', mockStorage);
         let l2 = instanceList.fetchInstanceLists(mockStorage);
-        assert.strictEqual(success, false);
+        assert.strictEqual(ind, -1);
         assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length);
     });
     it('Allows removal of a default instance', () => {
-        let success = instanceList.removeInstance('mastodon', instanceList.DEFAULT_LISTS['mastodon'][0], mockStorage);
+        let ind = instanceList.removeInstance('mastodon', instanceList.DEFAULT_LISTS['mastodon'][0], mockStorage);
         let l2 = instanceList.fetchInstanceLists(mockStorage);
-        assert.strictEqual(success, true);
+        assert.strictEqual(ind, 0);
         assert.strictEqual(l2['mastodon'].length, lists['mastodon'].length-1);
     });
 });

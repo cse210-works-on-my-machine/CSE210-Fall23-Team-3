@@ -2,11 +2,12 @@ import {describe, it, after, afterEach, before, beforeEach} from 'node:test';
 import {JSDOM} from 'jsdom';
 import * as assert from 'assert';
 import {test} from 'node:test';
-import { MastodonFetcher } from "../../../src/scripts/fetchers/MastodonFetcher.js";
+import { MastodonFetcher, TAGS_SUFFIX, POST_SUFFIX } from "../../../src/scripts/fetchers/MastodonFetcher.js";
 import fetch from 'node-fetch';
 import sinon from 'sinon';
 import * as Constant from "../../../src/scripts/entity/Constant.js";
 
+const FAKE_URL = 'fakeTrendingURL';
 describe('MastodonFetcher', () => {
 
     let fetchStub;
@@ -21,7 +22,8 @@ describe('MastodonFetcher', () => {
     describe('#fetchPosts', () => {
       it('should return an array of posts', async function() {
 
-        fetchStub.withArgs(Constant.MASTODON_SOCIAL_TRENDING_TAGS).resolves(Promise.resolve(new Response(JSON.stringify([
+        // Mock trending tags response
+        fetchStub.withArgs(FAKE_URL + TAGS_SUFFIX).resolves(Promise.resolve(new Response(JSON.stringify([
           {'name': 'tag1'}, 
           {'name': 'tag2'}
          ]), { status: 200 })));
@@ -42,11 +44,11 @@ describe('MastodonFetcher', () => {
           }
       };
 
-        // Fetch the mock response for each of the tags
-        fetchStub.withArgs(Constant.MASTODON_SOCIAL_TRENDING_POST_PER_TAG + 'tag1').resolves(mockResponse);
-        fetchStub.withArgs(Constant.MASTODON_SOCIAL_TRENDING_POST_PER_TAG + 'tag2').resolves(mockResponse);
+        // Mock trending post response for each tag
+        fetchStub.withArgs(FAKE_URL + POST_SUFFIX + 'tag1').resolves(mockResponse);
+        fetchStub.withArgs(FAKE_URL + POST_SUFFIX + 'tag2').resolves(mockResponse);
    
-        const posts =  await mastodonFetcher.fetchPosts();
+        const posts = await mastodonFetcher.fetchPosts(FAKE_URL);
         
         assert.strictEqual(posts.length, 2);
 

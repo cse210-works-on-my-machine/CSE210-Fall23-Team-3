@@ -2,8 +2,8 @@ import * as constant from "../entity/Constant.js";
 import { Fetcher } from "./Fetcher.js";
 
 
-const TAGS_SUFFIX = "/api/v1/trends/tags";
-const POST_SUFFIX = "/api/v1/timelines/tag/:";
+export const TAGS_SUFFIX = "/api/v1/trends/tags";
+export const POST_SUFFIX = "/api/v1/timelines/tag/:";
 
 export class MastodonFetcher extends Fetcher{
     /**
@@ -28,12 +28,12 @@ export class MastodonFetcher extends Fetcher{
   
     /**
      *
-     * @param {string} endpoint - The base endpoint of the mastodon instance
+     * @param {string} trendingTagsURL - The base endpoint of the mastodon instance
      * @returns {Promise<Array>} - A promise that resolves to an array of trending tags
      */
-    async #fetchTrendingTags(endpoint) {
+    async #fetchTrendingTags(trendingTagsURL) {
       try {
-        const response = await fetch(endpoint);
+        const response = await fetch(trendingTagsURL);
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
@@ -51,9 +51,9 @@ export class MastodonFetcher extends Fetcher{
      * @returns {Promise<Array>} - A promise that resolves to an array of posts for the given hashtag
      */
     async #fetchPostsByHashtag(instURL, hashtag) {
-      const endpoint  = instURL + POST_SUFFIX + hashtag;
+      const trendingPostURL  = instURL + POST_SUFFIX + hashtag;
       try {
-        const response = await fetch(endpoint);
+        const response = await fetch(trendingPostURL);
         if (!response.ok) {
           throw new Error(`HTTP error: ${response.status}`);
         }
