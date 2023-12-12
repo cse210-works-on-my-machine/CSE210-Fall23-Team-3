@@ -11,6 +11,16 @@ export class Paginator {
         this.itemsPerPage = itemsPerPage;
         this.currentPage = 1;
         this.displayPage();
+
+        const nextPage = document.getElementById("next-page");
+        const prevPage = document.getElementById("prev-page");
+        nextPage.addEventListener("click", function () {
+            this.nextPage();
+        }.bind(this));
+
+        prevPage.addEventListener("click", function () {
+            this.prevPage();
+        }.bind(this));
     }
 
     /**

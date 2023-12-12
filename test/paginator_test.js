@@ -37,7 +37,7 @@ describe("Paginator", () => {
     let pageLabel;
 
     beforeEach(() => {
-        dom = new JSDOM("<!doctype html><html><body><div id=\"featuredTagsPosts\"></div><span id=\"page-label\"></span></body></html>", {
+        dom = new JSDOM("<!doctype html><html><body><div id=\"featuredTagsPosts\"></div><footer><button class=\"page-button\" id=\"prev-page\" type=\"button\"></button><span class=\"page-label\" id=\"page-label\">Page 2</span><button class=\"page-button\" id=\"next-page\" type=\"button\"></button></footer> </body></html>", {
             url: "http://localhost",
         });
         global.document = dom.window.document;
