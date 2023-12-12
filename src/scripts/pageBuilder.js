@@ -19,7 +19,6 @@ export async function buildPage(HANDLERS) {
     nextPage.disabled = true;
     prevPage.disabled = true;
 
-    // TODO: blend posts from different instances together rather than having them back to back
     // TODO: sane pre-fetching solution that isn't just one instance
     let postsByNetwork = {};
     let maxLengthArray = 0;
@@ -36,8 +35,6 @@ export async function buildPage(HANDLERS) {
         }
         maxLengthArray = Math.max(maxLengthArray, postsByNetwork[network].length);
     }
-    console.log(postsByNetwork);
-    console.log(maxLengthArray);
 
     let posts = [];
     for (let i = 0; i < maxLengthArray; i++) {
@@ -47,7 +44,6 @@ export async function buildPage(HANDLERS) {
             }
         }
     }
-    console.log(posts);
 
     const paginator = new Paginator(posts, 10);
 
