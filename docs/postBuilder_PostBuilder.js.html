@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: postBuilder/PostBuilder.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,33 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: postBuilder/PostBuilder.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @interface
+ * Display class that will be subclassed by the different Displays
+ */
+export class PostBuilder {
+    constructor(){
+    }
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    /**
+     * @param {Object} rawPost - The raw json data from the API
+     */
+    buildPost(rawPost){
+        throw new Error("Not implemented - You must implement displayPost() in a subclass");
+    }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 
