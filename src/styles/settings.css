@@ -1,0 +1,72 @@
+main section {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media only screen and (min-width: 40em) {
+    main section {
+        flex-direction: row;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+ul {
+    padding: 0;
+    list-style-type: inside;
+}
+
+h2 {
+    text-align: center;
+}
+
+li {
+    padding-bottom: 5px;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    gap: 5px;
+}
+
+li button {
+    border-style: outset;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+li input{
+    text-align: left;
+    border-style: inset;
+    padding: 2px;
+}
+
+input[type="text"] {
+    font-family: inherit;
+    width: 1fr;
+    height: 1fr;
+    text-align: left;
+    border-style: inset;
+    padding: 2px;
+}
+
+li span {
+    background-color: lightgray;
+}
+
+.instances-reset-button {
+    padding-top: 5px;
+    gap: 0;
+}
+
+.instances-reset-button button {
+    border-style: outset;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-family: 'Noto Sans', sans-serif;
+}

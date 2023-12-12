@@ -1,37 +1,22 @@
-import "../scripts/Post.js"; // Import the custom element
-import * as apiUtils from "../scripts/apiUtils.js";
+import "./entity/Post.js";
 
-const tagsURL = "https://mastodon.social/api/v1/trends/tags";
-const postPrefix = "https://mastodon.social/api/v1/timelines/tag/:"
+import { LemmyFetcher } from "./fetchers/LemmyFetcher.js";
+import { LemmyPostBuilder } from "./postBuilder/LemmyPostBuilder.js";
+import { MastodonFetcher } from "./fetchers/MastodonFetcher.js";
+import { MastodonPostBuilder } from "./postBuilder/MastodonPostBuilder.js";
+import { buildPage } from "./pageBuilder.js";
 
-document.addEventListener("DOMContentLoaded", function () {
-    displayPostsNew();
-});
+const HANDLERS = {
+    lemmy: { fetcher: LemmyFetcher, postBuilder: LemmyPostBuilder },
+    mastodon: { fetcher: MastodonFetcher, postBuilder: MastodonPostBuilder },
+};
 
-/**
- * Functions that fetches trending tags and displays posts for each tag using 
- * custom fedi-post HTML element
- */
-async function displayPostsNew() {
-    const container = document.getElementById("featuredTagsPosts");
-    const hashtags = await apiUtils.fetchTrendingTags(tagsURL);
-    hashtags.forEach(async (tag) => {
-        const posts = await apiUtils.fetchPostsByHashtag(postPrefix, tag.name);
-        posts.forEach((post) => {
-            const postDiv = createNewFediPost(post);
-            container.appendChild(postDiv);
-        });
+document.addEventListener("DOMContentLoaded", async function () {
+    // Build the page and defer loadings
+    buildPage(HANDLERS);
+
+    const refresh = document.getElementById("refresh");
+    refresh.addEventListener("click", function () {
+        buildPage(HANDLERS);
     });
-}
-
-// this should go in some factory class
-function createNewFediPost(json_post) {
-    const newPost = document.createElement("fedi-post");
-    newPost.setAttribute('id', json_post.id);
-    newPost.setAttribute('content', json_post.content);
-    newPost.setAttribute('author-name', json_post.account.username);
-    newPost.setAttribute('created-at', json_post.created_at);
-    newPost.setAttribute('author-image-url', json_post.account.avatar);
-    newPost.setAttribute('author-handle', json_post.account.acct);
-    return newPost;
-}
+});
