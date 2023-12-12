@@ -14,4 +14,9 @@ const HANDLERS = {
 document.addEventListener("DOMContentLoaded", async function () {
     // Build the page and defer loadings
     buildPage(HANDLERS);
+
+    const refresh = document.getElementById("refresh");
+    refresh.addEventListener("click", function () {
+        buildPage(HANDLERS);
+    });
 });
