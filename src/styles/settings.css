@@ -5,7 +5,7 @@ main section {
     align-items: center;
 }
 
-@media only screen and (min-width: 40em) {
+@media only screen and (min-width: 640px) {
     main section {
         flex-direction: row;
     }
