@@ -1,6 +1,6 @@
 import { describe, it, beforeEach } from "node:test";
 import * as assert from "assert";
-import { MastodonFetcher, TAGS_SUFFIX, POST_SUFFIX } from "../../../src/scripts/fetchers/MastodonFetcher.js";
+import { MastodonFetcher, TAGS_SUFFIX, POST_SUFFIX, NUM_MASTODON_POSTS } from "../../../src/scripts/fetchers/MastodonFetcher.js";
 import sinon from "sinon";
 
 const FAKE_URL = "fakeTrendingURL";
@@ -39,8 +39,8 @@ describe("MastodonFetcher", () => {
             };
 
             // Mock trending post response for each tag
-            fetchStub.withArgs(FAKE_URL + POST_SUFFIX + "tag1").resolves(mockResponse);
-            fetchStub.withArgs(FAKE_URL + POST_SUFFIX + "tag2").resolves(mockResponse);
+            fetchStub.withArgs(FAKE_URL + POST_SUFFIX + "tag1" + "?limit=" + NUM_MASTODON_POSTS).resolves(mockResponse);
+            fetchStub.withArgs(FAKE_URL + POST_SUFFIX + "tag2" + "?limit=" + NUM_MASTODON_POSTS).resolves(mockResponse);
 
             const posts = await mastodonFetcher.fetchPosts(FAKE_URL);
 
