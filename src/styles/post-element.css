@@ -1,16 +1,31 @@
 :host {
-    width: 80%;
+    width: 90%;
     display: grid;
-    grid-template-columns: auto 1fr;
+    /* picture width is 106px with border, so align date with it */
+    grid-template-columns: 106px 1fr;
     grid-template-rows: max-content max-content max-content;
     gap: 1em;
     padding-bottom: 1em;
     padding-top: 1em;
 }
 
+@media only screen and (min-width: 640px) {
+    :host {
+        width: 70%;
+    }
+}
+
 .post-header {
     display: flex;
-    align-items: center
+    align-items: center;
+    word-break: break-all;
+}
+
+
+@media only screen and (min-width: 640px) {
+    .post-header {
+        word-wrap: normal;
+    }
 }
 
 picture {
