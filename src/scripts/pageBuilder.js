@@ -19,7 +19,6 @@ export async function buildPage(HANDLERS) {
     nextPage.disabled = true;
     prevPage.disabled = true;
 
-    // TODO: sane pre-fetching solution that isn't just one instance
     let postsByNetwork = {};
     let maxLengthArray = 0;
     const instLists = fetchInstanceLists();
