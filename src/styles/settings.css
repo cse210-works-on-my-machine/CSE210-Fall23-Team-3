@@ -32,11 +32,15 @@ li {
 }
 
 li button {
-    border-style: outset;
+    border: whitesmoke outset;
     text-align: center;
     width: 100%;
     font-size: 16px;
     font-family: 'Noto Sans', sans-serif;
+}
+
+li button:active {
+    border: whitesmoke inset;
 }
 
 li input{
@@ -50,7 +54,7 @@ input[type="text"] {
     width: 1fr;
     height: 1fr;
     text-align: left;
-    border-style: inset;
+    border: whitesmoke inset;
     padding: 2px;
 }
 
@@ -64,6 +68,8 @@ li span {
 }
 
 .instances-reset-button button {
+    padding-top: 5px;
+    padding-bottom: 5px;
     border-style: outset;
     text-align: center;
     width: 100%;
