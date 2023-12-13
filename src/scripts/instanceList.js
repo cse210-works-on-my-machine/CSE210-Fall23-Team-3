@@ -1,6 +1,6 @@
 export const DEFAULT_LISTS = {
-    mastodon: ["https://mastodon.social", "https://fosstodon.org"],
-    lemmy: ["https://lemmy.ml"],
+    mastodon: ["https://mastodon.social", "https://fosstodon.org", "https://mstdn.social", "https://mastodon.online", "https://mastodon.world"],
+    lemmy: ["https://lemmy.ml", "https://lemmy.world", "https://lemm.ee"],
 };
 
 const INST_LISTS = "instanceLists";
