@@ -2,7 +2,7 @@ import { Fetcher } from "./Fetcher.js";
 
 export const TAGS_SUFFIX = "/api/v1/trends/tags";
 export const POST_SUFFIX = "/api/v1/timelines/tag/:";
-export const NUM_MASTODON_POSTS = 20;
+export const NUM_MASTODON_POSTS = 15;
 
 export class MastodonFetcher extends Fetcher {
     /**
@@ -12,12 +12,10 @@ export class MastodonFetcher extends Fetcher {
     async fetchPosts(instURL) {
         try {
             const hashtags = await this.#fetchTrendingTags(instURL + TAGS_SUFFIX);
-            const posts = [];
-            for (const tag of hashtags) {
-                console.log("Fetching posts for tag: " + tag.name);
-                let response = await this.#fetchPostsByHashtag(instURL, tag.name);
-                posts.push(...response);
-            }
+            const fetchPromises = hashtags.map(tag => this.#fetchPostsByHashtag(instURL, tag.name));
+            const responses = await Promise.all(fetchPromises);
+            const posts = responses.flat();
+            posts.push(...posts);
             return posts;
         }
         catch (error) {

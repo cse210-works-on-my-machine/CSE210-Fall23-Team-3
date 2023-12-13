@@ -44,7 +44,7 @@ describe("MastodonFetcher", () => {
 
             const posts = await mastodonFetcher.fetchPosts(FAKE_URL);
 
-            assert.strictEqual(posts.length, 2);
+            assert.strictEqual(posts.length, 4);
         });
     });
 });
