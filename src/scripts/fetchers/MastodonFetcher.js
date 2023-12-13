@@ -13,7 +13,12 @@ export class MastodonFetcher extends Fetcher {
         try {
             const hashtags = await this.#fetchTrendingTags(instURL + TAGS_SUFFIX);
             const fetchPromises = hashtags.map(tag => this.#fetchPostsByHashtag(instURL, tag.name));
-            const responses = await Promise.all(fetchPromises);
+            const timeoutDelay = 10000;
+            const responses = await Promise.race(
+                [
+                    Promise.all(fetchPromises),
+                    new Promise((_resolve, reject) => setTimeout(() => reject("Fetch calls timed out."), timeoutDelay)),
+                ]);
             const posts = responses.flat();
             posts.push(...posts);
             return posts;

@@ -52,7 +52,7 @@ export class InstanceEntry extends HTMLElement {
             </button>
         </li>
         `;
-        let script = document.createElement("script");
+        const script = document.createElement("script");
         script.type = "module";
         script.textContent = `
         import { handleRemoveInstance } from './src/scripts/instanceList.js';

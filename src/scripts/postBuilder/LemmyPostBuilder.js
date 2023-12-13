@@ -18,7 +18,7 @@ export class LemmyPostBuilder extends PostBuilder {
      * @returns {Object}- A Post element created from raw json data from the API
      */
     buildPost(post) {
-        let newPost = document.createElement("fedi-post");
+        const newPost = document.createElement("fedi-post");
         newPost.setAttribute("id", post.post.id);
         newPost.setAttribute("content", this.#extractPostContent(post.post)); // Either a url or body or both.
         newPost.setAttribute("author-name", post.creator.name);
