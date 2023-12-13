@@ -1,11 +1,10 @@
- export class Post {
-    
+export class Post {
     constructor(id, content, authorName, createdAt, authorImage) {
         this.id = id;
         this.content = content;
         this.authorName = authorName; // Assuming 'author' is a simple string or object
         this.createdAt = createdAt;
-        this.authorImageURL = authorImage
+        this.authorImageURL = authorImage;
     }
 
     static fromJSON(json) {
@@ -13,25 +12,25 @@
     }
 
     getDisplayDiv() {
-        const postDiv = document.createElement('div');
-        postDiv.className = 'post';
+        const postDiv = document.createElement("div");
+        postDiv.className = "post";
 
         // Author image
         if (this.authorImageURL) {
             console.log("Image found");
-            const image = document.createElement('img');
+            const image = document.createElement("img");
             image.src = this.authorImageURL;
             image.alt = `Image of ${this.authorName}`;
-            image.className = 'author-image';
+            image.className = "author-image";
             postDiv.appendChild(image);
         }
-        else{
+        else {
             console.log("No image found");
         }
 
         // Post content
-        const contentParagraph = document.createElement('p');
-        contentParagraph.innerHTML = this.content; 
+        const contentParagraph = document.createElement("p");
+        contentParagraph.innerHTML = this.content;
         postDiv.appendChild(contentParagraph);
 
         return postDiv;

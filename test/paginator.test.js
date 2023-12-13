@@ -1,4 +1,4 @@
-import { describe, it, after, afterEach, before, beforeEach } from "node:test";
+import { describe, it, beforeEach } from "node:test";
 import { JSDOM } from "jsdom";
 import * as assert from "assert";
 
@@ -33,7 +33,6 @@ describe("Paginator", () => {
     ];
 
     let dom;
-    let container;
     let pageLabel;
 
     beforeEach(() => {
@@ -49,7 +48,6 @@ describe("Paginator", () => {
         global.HTMLElement = dom.window.HTMLElement;
         global.customElements = dom.window.customElements;
 
-        container = document.getElementById("featuredTagsPosts");
         pageLabel = document.getElementById("page-label");
     });
 
