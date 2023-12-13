@@ -6,7 +6,7 @@ export class Fetcher {
     constructor() {
     }
 
-    async fetchPosts(instanceUrl) {
+    async fetchPosts() {
         throw new Error("Not implemented - You must implement fetchPosts() in a subclass");
     }
 }

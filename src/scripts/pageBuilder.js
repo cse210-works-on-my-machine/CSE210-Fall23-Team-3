@@ -38,7 +38,7 @@ export async function buildPage(HANDLERS) {
 
     let posts = [];
     for (let i = 0; i < maxLengthArray; i++) {
-        for (let [network, _] of Object.entries(instLists)) {
+        for (let [network] of Object.entries(instLists)) {
             if (i < postsByNetwork[network].length) {
                 posts.push(postsByNetwork[network][i]);
             }

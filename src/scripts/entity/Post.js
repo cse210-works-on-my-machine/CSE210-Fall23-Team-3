@@ -78,7 +78,7 @@ export class Post extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="src/styles/post-element.css">
             <picture>
-                <img src=${this.authorImageURL}></img>
+                <img src=${this.authorImageURL} alt="Profile picture for user ${this.authorName}">
             </picture>
             <h2 class="post-header">${this.authorName}</h2>
             <a target="_blank" href=${this.directURL}><time datetime=${this.createdAt}>${(new Date(this.createdAt)).toLocaleString()}</time></a>

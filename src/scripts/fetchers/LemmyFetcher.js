@@ -1,4 +1,3 @@
-import * as constant from "../entity/Constant.js";
 import { Fetcher } from "./Fetcher.js";
 
 const NUM_POSTS = 50;
