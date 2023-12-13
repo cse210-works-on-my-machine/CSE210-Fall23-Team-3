@@ -31,7 +31,6 @@ addInstBtns.forEach((element) => {
         // add https:// if the user forgot
         if (!(url.includes("//"))) {
             url = "https://".concat(url);
-            console.log(url);
         }
         let success = await addInstance(network, url);
         if (success) {
@@ -43,14 +42,12 @@ addInstBtns.forEach((element) => {
             input.value = ""; // clear input box after adding to UI
         }
         else {
-            // TODO: don't use an alert
             alert("Adding instance failed, please try again");
         }
     });
 });
 
 // Add event listeners for "reset to default"
-// TODO: refactor CSS classes to "button" or "btn". choose one
 let resetDefaultBtns = Array.from(document.getElementsByClassName("instances-reset-button"));
 resetDefaultBtns.forEach((element) => {
     element.addEventListener("click", (event) => {

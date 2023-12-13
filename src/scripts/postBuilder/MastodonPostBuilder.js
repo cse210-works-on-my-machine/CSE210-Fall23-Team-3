@@ -1,22 +1,6 @@
 import { PostBuilder } from "./PostBuilder.js";
 
 export class MastodonPostBuilder extends PostBuilder {
-    // TODO: review this function, remove if not needed
-    #interleaveArrays(responses) {
-        const maxLength = Math.max(...responses.map(response => response.length));
-        const result = [];
-
-        for (let i = 0; i < maxLength; i++) {
-            for (let j = 0; j < responses.length; j++) {
-                if (responses[j].length > i) {
-                    result.push(responses[j][i]);
-                }
-            }
-        }
-
-        return result;
-    }
-
     /**
      *
      * @param {Object} rawPost - The raw json data from the API

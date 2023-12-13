@@ -43,15 +43,7 @@ export function saveLists(instanceLists, storage = localStorage) {
  * @returns {Promise<boolean>} Promise which resolves to True if the instance addition was successful, False otherwise
  */
 export async function addInstance(network, url, storage = localStorage) {
-    // TODO: move validation out of this function? (may separate concerns better)
     if (!(ALLOWED_NETWORKS.has(network)) || !validUrl(url)) return false;
-    // Commented out because this creates CORS errors if not done exactly on API
-    // try {
-    //     let response = await fetch(url);
-    //     if (response.status !== 200) return false;
-    // } catch (_) {
-    //     return false;
-    // }
 
     let instanceList = fetchInstanceLists(storage);
     // network is already guaranteed to be in ALLOWED_NETWORKS and thus on the default list
