@@ -32,6 +32,9 @@
         "no-var": [
             "error"
         ],
+        "prefer-const": [
+            "error"
+        ],
         "@stylistic/arrow-spacing": [
             "error",
             {

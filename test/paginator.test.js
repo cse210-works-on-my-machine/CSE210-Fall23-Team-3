@@ -69,7 +69,7 @@ describe("Paginator", () => {
             paginator = new paginatorImport.Paginator(posts, 2);
 
             // Should display the first two posts
-            let featuredTagsPosts = document.getElementById("featuredTagsPosts");
+            const featuredTagsPosts = document.getElementById("featuredTagsPosts");
             assert.strictEqual(featuredTagsPosts.children.length, 2);
             assert.strictEqual(pageLabel.innerHTML, "Page 1 of 2");
         });
@@ -92,7 +92,7 @@ describe("Paginator", () => {
         paginator = new paginatorImport.Paginator(posts, 2);
 
         // Should display the first two posts - before clicking next
-        let featuredTagsPosts = document.getElementById("featuredTagsPosts");
+        const featuredTagsPosts = document.getElementById("featuredTagsPosts");
         assert.strictEqual(featuredTagsPosts.children.length, 2);
 
         // Should display the next two posts (well actually one since length is 3)
@@ -118,7 +118,7 @@ describe("Paginator", () => {
         paginator = new paginatorImport.Paginator(posts, 2);
 
         // Should display the first two posts - before clicking next
-        let featuredTagsPosts = document.getElementById("featuredTagsPosts");
+        const featuredTagsPosts = document.getElementById("featuredTagsPosts");
         assert.strictEqual(featuredTagsPosts.children.length, 2);
 
         // Should stay at page 1
@@ -144,7 +144,7 @@ describe("Paginator", () => {
         paginator = new paginatorImport.Paginator(posts, 2);
 
         // Should display the first two posts - before clicking next
-        let featuredTagsPosts = document.getElementById("featuredTagsPosts");
+        const featuredTagsPosts = document.getElementById("featuredTagsPosts");
         assert.strictEqual(featuredTagsPosts.children.length, 2);
 
         // Should display the next two posts (well actually one since length is 3)

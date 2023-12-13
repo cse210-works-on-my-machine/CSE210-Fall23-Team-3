@@ -19,25 +19,29 @@ export async function buildPage(HANDLERS) {
     nextPage.disabled = true;
     prevPage.disabled = true;
 
-    let postsByNetwork = {};
+    const postsByNetwork = {};
     let maxLengthArray = 0;
     const instLists = fetchInstanceLists();
-    for (let [network, instanceList] of Object.entries(instLists)) {
-        let fetcher = new HANDLERS[network]["fetcher"]();
-        let postBuilder = new HANDLERS[network]["postBuilder"]();
+    // Iterate over networks (currently just Mastodon and Lemmy)
+    for (const [network, instanceList] of Object.entries(instLists)) {
+        // Get object handlers for API and post formatting
+        const fetcher = new HANDLERS[network]["fetcher"]();
+        const postBuilder = new HANDLERS[network]["postBuilder"]();
         postsByNetwork[network] = [];
-        for (let url of instanceList) {
-            let res = await fetcher.fetchPosts(url);
-            for (let post of res) {
+        // Iterate over each network's instance list
+        for (const url of instanceList) {
+            const res = await fetcher.fetchPosts(url);
+            if (res === null) continue;
+            for (const post of res) {
                 postsByNetwork[network].push(postBuilder.buildPost(post));
             }
         }
         maxLengthArray = Math.max(maxLengthArray, postsByNetwork[network].length);
     }
 
-    let posts = [];
+    const posts = [];
     for (let i = 0; i < maxLengthArray; i++) {
-        for (let [network] of Object.entries(instLists)) {
+        for (const [network] of Object.entries(instLists)) {
             if (i < postsByNetwork[network].length) {
                 posts.push(postsByNetwork[network][i]);
             }

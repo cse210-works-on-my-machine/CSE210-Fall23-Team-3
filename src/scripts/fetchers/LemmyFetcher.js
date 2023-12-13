@@ -12,11 +12,17 @@ export class LemmyFetcher extends Fetcher {
         const posts = [];
         try {
             const url = instanceUrl + API_V3 + "&limit=" + NUM_POSTS;
-            const response = await fetch(url);
+
+            const timeoutDelay = 10000;
+            const response = await Promise.race([
+                fetch(url),
+                new Promise((_resolve, reject) => setTimeout(() => reject("Fetch calls timed out."), timeoutDelay)),
+            ]);
+
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
-            let response_data = await response.json();
+            const response_data = await response.json();
             const posts_json = response_data.posts;
             posts_json.forEach((post) => {
                 posts.push(post);
