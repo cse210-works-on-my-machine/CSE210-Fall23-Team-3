@@ -3,6 +3,7 @@ import { Fetcher } from "./Fetcher.js";
 
 export const TAGS_SUFFIX = "/api/v1/trends/tags";
 export const POST_SUFFIX = "/api/v1/timelines/tag/:";
+const NUM_POSTS = 15;
 
 export class MastodonFetcher extends Fetcher {
     /**
@@ -52,7 +53,7 @@ export class MastodonFetcher extends Fetcher {
      * @returns {Promise<Array>} - A promise that resolves to an array of posts for the given hashtag
      */
     async #fetchPostsByHashtag(instURL, hashtag) {
-        const trendingPostURL = instURL + POST_SUFFIX + hashtag;
+        const trendingPostURL = instURL + POST_SUFFIX + hashtag + "?limit=" + NUM_POSTS;
         try {
             const response = await fetch(trendingPostURL);
             if (!response.ok) {
