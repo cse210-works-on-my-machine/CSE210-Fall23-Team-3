@@ -1,5 +1,3 @@
-import { Post } from "./entity/Post.js";
-
 const nextPage = document.getElementById("next-page");
 const prevPage = document.getElementById("prev-page");
 
@@ -30,7 +28,6 @@ export class Paginator {
      * Display the page of items
      */
     displayPage() {
-        
         // Scroll to top of the page
         document.body.scrollTop = 0; // Safari
         document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera

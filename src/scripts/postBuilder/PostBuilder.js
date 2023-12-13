@@ -9,7 +9,7 @@ export class PostBuilder {
     /**
      * @param {Object} rawPost - The raw json data from the API
      */
-    buildPost(rawPost) {
+    buildPost() {
         throw new Error("Not implemented - You must implement displayPost() in a subclass");
     }
 }

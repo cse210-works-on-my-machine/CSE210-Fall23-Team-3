@@ -1,4 +1,3 @@
-import * as constant from "../entity/Constant.js";
 import { Fetcher } from "./Fetcher.js";
 
 export const TAGS_SUFFIX = "/api/v1/trends/tags";
