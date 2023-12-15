@@ -24,9 +24,9 @@ graph TD
       L2[LemmyInstance2] -->|API Response| LF
       L3[LemmyInstance3] -->|API Response| LF
 
-      M1[LemmyInstance1] -->|API Response| MF[MastodonFetcher]
-      M2[LemmyInstance2] -->|API Response| MF
-      M3[LemmyInstance3] -->|API Response| MF
+      M1[MastodonInstance1] -->|API Response| MF[MastodonFetcher]
+      M2[MastodonInstance2] -->|API Response| MF
+      M3[MastodonInstance3] -->|API Response| MF
 
       O1[OtherInstances] -->|API Response| OF[Other Fetchers]
     end
@@ -110,6 +110,5 @@ Pushing to main is blocked unless all of the above steps pass and the code is ap
 
 # Additional Documentation
 
-- [Testing Specification](specs/Testing.md)
+- [Testing](admin/Testing.md)
 - [Trending Specification](specs/Trending%20posts%20specification.md)
-- [Style Specification](specs/Style.md)
