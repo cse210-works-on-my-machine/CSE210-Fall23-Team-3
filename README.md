@@ -50,11 +50,6 @@ graph TD
     subgraph Application
         IJS -->|Initializes application| ST[index.html]
     end
-
-    style Fetchers fill:#cfc,stroke:#333,stroke-width:2px
-    style PostBuilders fill:#ccf,stroke:#333,stroke-width:2px
-    style Paginator fill:#fcf,stroke:#333,stroke-width:2px
-    style Application fill:#cff,stroke:#333,stroke-width:2px
 ```
 
 # Repository Structure
