@@ -47,15 +47,14 @@ graph TD
         P -->|Manages pagination| IJS[index.js]
     end
 
-    subgraph Application Initialization
+    subgraph Application
         IJS -->|Initializes application| ST[index.html]
     end
 
-    style Fetchers fill:#f9f,stroke:#333,stroke-width:2px
+    style Fetchers fill:#cfc,stroke:#333,stroke-width:2px
     style PostBuilders fill:#ccf,stroke:#333,stroke-width:2px
-    style Factory fill:#cfc,stroke:#333,stroke-width:2px
     style Paginator fill:#fcf,stroke:#333,stroke-width:2px
-    style Application Initialization fill:#cff,stroke:#333,stroke-width:2px
+    style Application fill:#cff,stroke:#333,stroke-width:2px
 ```
 
 # Repository Structure
