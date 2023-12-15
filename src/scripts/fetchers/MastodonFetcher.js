@@ -1,8 +1,8 @@
-import * as constant from "../entity/Constant.js";
 import { Fetcher } from "./Fetcher.js";
 
 export const TAGS_SUFFIX = "/api/v1/trends/tags";
 export const POST_SUFFIX = "/api/v1/timelines/tag/:";
+export const NUM_MASTODON_POSTS = 15;
 
 export class MastodonFetcher extends Fetcher {
     /**
@@ -12,12 +12,15 @@ export class MastodonFetcher extends Fetcher {
     async fetchPosts(instURL) {
         try {
             const hashtags = await this.#fetchTrendingTags(instURL + TAGS_SUFFIX);
-            const posts = [];
-            for (const tag of hashtags) {
-                console.log("Fetching posts for tag: " + tag.name);
-                let response = await this.#fetchPostsByHashtag(instURL, tag.name);
-                posts.push(...response);
-            }
+            const fetchPromises = hashtags.map(tag => this.#fetchPostsByHashtag(instURL, tag.name));
+            const timeoutDelay = 10000;
+            const responses = await Promise.race(
+                [
+                    Promise.all(fetchPromises),
+                    new Promise((_resolve, reject) => setTimeout(() => reject("Fetch calls timed out."), timeoutDelay)),
+                ]);
+            const posts = responses.flat();
+            posts.push(...posts);
             return posts;
         }
         catch (error) {
@@ -52,7 +55,7 @@ export class MastodonFetcher extends Fetcher {
      * @returns {Promise<Array>} - A promise that resolves to an array of posts for the given hashtag
      */
     async #fetchPostsByHashtag(instURL, hashtag) {
-        const trendingPostURL = instURL + POST_SUFFIX + hashtag;
+        const trendingPostURL = instURL + POST_SUFFIX + hashtag + "?limit=" + NUM_MASTODON_POSTS;
         try {
             const response = await fetch(trendingPostURL);
             if (!response.ok) {

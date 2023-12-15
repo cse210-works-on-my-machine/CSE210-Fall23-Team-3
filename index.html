@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="What's happening across the Fediverse">
     <link rel="stylesheet" href="src/styles/common.css">
     <link rel="stylesheet" href="src/styles/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,19 +13,14 @@
 </head>
 <body>
     <header>
-        <h1>B L E N D</h1>
-        <button>
-            <img src="media/dropdown.svg" class="icon-large"/>
-        </button>
+        <h1>Blend</h1>
         <button id="refresh">
-            <img src="media/refresh.svg" class="icon-large"/>
+            <img src="media/refresh.svg" class="icon-large" alt="refresh button icon">
         </button>
         <div class="flex-spacer"></div>
-        <a href="settings.html">
-            <button>
-                <img src="media/settings.svg" class="icon-large"/>
-            </button>
-        </a>
+        <button onclick="location.href='settings.html'">
+            <img src="media/settings.svg" class="icon-large" alt="settings page button icon">
+        </button>
     </header>
     <div id="loading">
         <div class="shadowbox">
@@ -36,22 +32,15 @@
         </div>
     </div>
     <main id="featuredTagsPosts">
-        <template>
-        <fedi-post author-image-url="https://cse.ucsd.edu/sites/default/files/faculty/powellF17-115x150.jpg"
-            author-name="Thomas A. Powell" 
-            author-handle="thomasapowell@fosstodon.org"
-            content="React sucks. It completely ruins your response time. I mean come on guys. It's bonkers. What are we even doing here?"
-            created-at="2023-11-30T10:00:00Z"></fedi-post>
-        </template>
     </main>
     <script type="module" src="src/scripts/index.js"></script>
     <footer>
         <button class="page-button" id="prev-page" type="button">
-            <img src="media/previous-page.svg" class="icon-small"></img>
+            <img src="media/previous-page.svg" class="icon-small" alt="previous page button icon">
         </button>
-        <span class="page-label" id="page-label">Page 2</span>
+        <span class="page-label" id="page-label"></span>
         <button class="page-button" id="next-page" type="button">
-            <img src="media/next-page.svg" class="icon-small"></img>
+            <img src="media/next-page.svg" class="icon-small" alt="next page button icon">
         </button>
     </footer> 
 </body>

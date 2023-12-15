@@ -10,8 +10,20 @@ header {
     align-items: center;
 }
 
+button {
+    border: whitesmoke outset;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgb(230, 230, 230);
+}
+
+button:active {
+    border: whitesmoke inset;
+}
+
 header button {
-    /* border: none; leave this commented for windows 95 */
     background: none;
     width: max-content;
     height: max-content;
@@ -19,6 +31,7 @@ header button {
     margin-left: 10px;
     margin-right: 10px;
 }
+
 
 .flex-spacer {
     flex-grow: 1;

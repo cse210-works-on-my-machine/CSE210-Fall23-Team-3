@@ -1,6 +1,6 @@
 export const DEFAULT_LISTS = {
-    mastodon: ["https://mastodon.social", "https://fosstodon.org"],
-    lemmy: ["https://lemmy.ml"],
+    mastodon: ["https://mastodon.social", "https://fosstodon.org", "https://mstdn.social", "https://mastodon.online", "https://mastodon.world"],
+    lemmy: ["https://lemmy.ml", "https://lemmy.world", "https://lemm.ee"],
 };
 
 const INST_LISTS = "instanceLists";
@@ -43,17 +43,9 @@ export function saveLists(instanceLists, storage = localStorage) {
  * @returns {Promise<boolean>} Promise which resolves to True if the instance addition was successful, False otherwise
  */
 export async function addInstance(network, url, storage = localStorage) {
-    // TODO: move validation out of this function? (may separate concerns better)
     if (!(ALLOWED_NETWORKS.has(network)) || !validUrl(url)) return false;
-    // Commented out because this creates CORS errors if not done exactly on API
-    // try {
-    //     let response = await fetch(url);
-    //     if (response.status !== 200) return false;
-    // } catch (_) {
-    //     return false;
-    // }
 
-    let instanceList = fetchInstanceLists(storage);
+    const instanceList = fetchInstanceLists(storage);
     // network is already guaranteed to be in ALLOWED_NETWORKS and thus on the default list
     instanceList[network].unshift(url);
     storage.setItem(INST_LISTS, JSON.stringify(instanceList));
@@ -67,9 +59,9 @@ export async function addInstance(network, url, storage = localStorage) {
  * @param {Storage} storage
  */
 export function handleRemoveInstance(network, url, storage = localStorage) {
-    let i = removeInstance(network, url, storage);
+    const i = removeInstance(network, url, storage);
     if (i !== -1) {
-        let list = document.getElementById(`${network}-instance-list`);
+        const list = document.getElementById(`${network}-instance-list`);
         // first child will always be add instance input box
         // index 0 of instance list will be child 1
         list.removeChild(list.children[i + 1]);
@@ -83,9 +75,9 @@ export function handleRemoveInstance(network, url, storage = localStorage) {
  * @returns {number} Index removed if successful, -1 otherwise
  */
 export function removeInstance(network, url, storage = localStorage) {
-    let instanceLists = fetchInstanceLists(storage);
+    const instanceLists = fetchInstanceLists(storage);
     if (network in instanceLists && instanceLists[network].includes(url)) {
-        let ind = instanceLists[network].indexOf(url);
+        const ind = instanceLists[network].indexOf(url);
         instanceLists[network].splice(ind, 1);
         saveLists(instanceLists, storage);
         return ind;

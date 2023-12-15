@@ -6,11 +6,15 @@ li {
 }
 
 li button {
-    border-style: outset;
+    border: whitesmoke outset;
     text-align: center;
     width: 100%;
     font-size: 16px;
     font-family: 'Noto Sans', sans-serif;
+}
+
+li button:active {
+    border: whitesmoke inset;
 }
 
 li span {

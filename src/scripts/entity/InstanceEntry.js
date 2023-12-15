@@ -52,14 +52,10 @@ export class InstanceEntry extends HTMLElement {
             </button>
         </li>
         `;
-        let script = document.createElement("script");
+        const script = document.createElement("script");
         script.type = "module";
         script.textContent = `
         import { handleRemoveInstance } from './src/scripts/instanceList.js';
-        // document.getElementById('instance-removal-button').addEventListener('click', () => {
-        //     handleRemoveInstance(${this.network}, ${this.url});
-        //     console.log('removal button clicked');
-        // });
         window.handleRemoveInstance = handleRemoveInstance;
         `;
         this.shadowRoot.appendChild(script);

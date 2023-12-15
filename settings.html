@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="What's happening across the Fediverse: settings page">
     <link rel="stylesheet" href="src/styles/common.css">
     <link rel="stylesheet" href="src/styles/settings.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
+    </noscript>
+
     <title>Blend | What's happening across the Fediverse</title>
 </head>
 <body>
     <header>
-        <h1>B L E N D</h1>
+        <h1>Blend</h1>
         <div class="flex-spacer"></div>
-        <a href="index.html">
-            <button>
-                <img src="media/feed.svg" class="icon-large"></img>
-            </button>
-        </a>
+        <button onclick="location.href='index.html'">
+            <img src="media/feed.svg" class="icon-large" alt="button icon for returning to feed">
+        </button>
     </header>
     <main>
         <h1>Instances</h1>
@@ -29,7 +33,7 @@
                     <li>
                         <input id="mastodon-add-instance" type="text">
                         <button class="add-instance-btn" data-network="mastodon">
-                            <img src="media/plus.svg" class="icon-small"></img>
+                            <img src="media/plus.svg" class="icon-small" alt="button to add new instance">
                         </button>
                     </li>
 
@@ -42,7 +46,7 @@
                     <li>
                         <input id="lemmy-add-instance" type="text">
                         <button class="add-instance-btn" data-network="lemmy">
-                            <img src="media/plus.svg" class="icon-small"></img>
+                            <img src="media/plus.svg" class="icon-small" alt="button to add new instance">
                         </button>
                     </li>
 
@@ -50,25 +54,8 @@
                 </ul>
             </div>
         </section>
-        <h1>Appearance</h1>
-        <section>
-            <div>
-                <label for="themes">Theme:</label>
-                <select name="themes" id="themes" >
-                    <option>Default Light</option>
-                    <option>Default Dark</option>
-                    <option>Retro Light</option>
-                    <option>Retro Dark</option>
-                </select>
-            </div>
-        </section>
-        
     </main>
-    
-    <footer>
-        Created by [names here], copyright LOLOLOL
-    </footer>
-    <script type="module" src="./src/scripts/settings-page.js"></script>
+    <script type="module" src="./src/scripts/settingsPage.js"></script>
 </body>
 </html>
 
