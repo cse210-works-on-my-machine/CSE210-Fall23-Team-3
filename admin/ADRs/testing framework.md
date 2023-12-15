@@ -18,6 +18,6 @@ Team decided to adopt Node.js native testing tools, for implementing our unit te
 ## Links/References
 - Node.js `assert` module documentation: [https://nodejs.org/api/assert.html](https://nodejs.org/api/assert.html)
 
-## Date: YYYY-MM-DD
+## Date: 2023-11-11
 The date the decision was made.
 (ISO 8601 date format)

@@ -21,7 +21,8 @@ We have decided to adopt ESLint as our primary tool for linting our JavaScript c
 ## Links/References
 - [ESLint Official Website](https://eslint.org/)
 - [ESLint Configuration Guide](https://eslint.org/docs/user-guide/configuring)
+- [Meeting Notes November 18](admin/meetings/2023-11-18.md)
 
-## Date: YYYY-MM-DD
+## Date: 2023-11-18
 The date the decision was made.
 (ISO 8601 date format)
