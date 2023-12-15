@@ -2,7 +2,7 @@
 
 [![codecov](https://codecov.io/gh/cse210-works-on-my-machine/CSE210-Fall23-Team-3/graph/badge.svg?token=E8U5P89N54)](https://codecov.io/gh/cse210-works-on-my-machine/CSE210-Fall23-Team-3)
 
-This repository is a Feed Amalgamator for various Fediverse platforms, in order to have a shared trending feed across all of them. This project was completed by 'Works on my Machine', Team 3 of CSE 210 at UC San Diego in Fall of 2023. 
+This repository is a Feed Amalgamator for various Fediverse platforms, in order to have a shared trending feed across all of them. This project was completed by 'Works on my Machine', Team 3 of CSE 210 at UC San Diego in Fall of 2023. The website is hosted here: https://fediblend.netlify.app/
 
 ## Team Members
 - Eric Zhang
@@ -109,3 +109,4 @@ Pushing to main is blocked unless all of the above steps pass and the code is ap
 # Additional Documentation
 
 - [Testing](admin/Testing.md)
+- [Trending Specification](specs/Trending%20posts%20specification.md)
