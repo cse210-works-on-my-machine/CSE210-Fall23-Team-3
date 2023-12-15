@@ -20,8 +20,9 @@ Decided to use Netlify as our deployment platform for the main project.
 ## Links/References
 - [Netlify Documentation](https://docs.netlify.com)
 - [Netlify Pricing](https://www.netlify.com/pricing/)
+- [Meeting Notes for November 29](admin/meetings/2023-11-29.md)
 
-## Date: YYYY-MM-DD
+## Date: 2023-11-29
 The date the decision was made.
 (ISO 8601 date format)
 

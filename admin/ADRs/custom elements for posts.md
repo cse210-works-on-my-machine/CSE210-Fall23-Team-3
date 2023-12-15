@@ -20,7 +20,8 @@ Decided to implement custom elements for posts within our web application. Custo
 ## Links/References
 - [Web Components Introduction](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
 - [Using Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
+- [Meeting Notes for Nov 29](admin/meetings/2023-11-29.md)
 
-## Date: YYYY-MM-DD
+## Date: 2023-11-29
 The date the decision was made.
 (ISO 8601 date format)

@@ -19,35 +19,37 @@ This repository is a Feed Amalgamator for various Fediverse platforms, in order 
 
 ```mermaid
 graph TD
+    subgraph Instances
+      L1[LemmyInstance1] -->|API Response| LF[LemmyFetcher]
+      L2[LemmyInstance2] -->|API Response| LF
+      L3[LemmyInstance3] -->|API Response| LF
+
+      M1[LemmyInstance1] -->|API Response| MF[MastodonFetcher]
+      M2[LemmyInstance2] -->|API Response| MF
+      M3[LemmyInstance3] -->|API Response| MF
+
+      O1[OtherInstances] -->|API Response| OF[Other Fetchers]
+    end
+
     subgraph Fetchers
-        LF[LemmyFetcher] -->|Fetches posts| LPB[LemmyPostBuilder]
-        MF[MastodonFetcher] -->|Fetches posts| MPB[MastodonPostBuilder]
-        OF[Other Fetchers] -->|Fetches posts| OPB[Other PostBuilders]
+        LF -->|Fetched posts| LPB[LemmyPostBuilder]
+        MF -->|Fetched posts| MPB[MastodonPostBuilder]
+        OF -->|Fetched posts| OPB[Other PostBuilders]
     end
 
     subgraph PostBuilders
-        LPB -->|Builds post elements| PF[PostFactory]
-        MPB -->|Builds post elements| PF
-        OPB -->|Builds post elements| PF
-    end
-
-    subgraph Factory
-        PF -->|Creates fetchers and post builders| P[Paginator]
+        LPB -->|Builds post elements| P[Paginator]
+        MPB -->|Builds post elements| P
+        OPB -->|Builds post elements| P
     end
 
     subgraph Paginator
         P -->|Manages pagination| IJS[index.js]
     end
 
-    subgraph Application Initialization
-        IJS -->|Initializes application| ST[styles/index.css]
+    subgraph Application
+        IJS -->|Initializes application| ST[index.html]
     end
-
-    style Fetchers fill:#f9f,stroke:#333,stroke-width:2px
-    style PostBuilders fill:#ccf,stroke:#333,stroke-width:2px
-    style Factory fill:#cfc,stroke:#333,stroke-width:2px
-    style Paginator fill:#fcf,stroke:#333,stroke-width:2px
-    style Application Initialization fill:#cff,stroke:#333,stroke-width:2px
 ```
 
 # Repository Structure
