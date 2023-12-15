@@ -108,5 +108,6 @@ Pushing to main is blocked unless all of the above steps pass and the code is ap
 
 # Additional Documentation
 
-- [Testing](admin/Testing.md)
+- [Testing Specification](specs/Testing.md)
 - [Trending Specification](specs/Trending%20posts%20specification.md)
+- [Style Specification](specs/Style.md)
