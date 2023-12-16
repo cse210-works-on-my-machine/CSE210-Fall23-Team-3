@@ -4,6 +4,8 @@
 
 This repository is a Feed Amalgamator for various Fediverse platforms, in order to have a shared trending feed across all of them. This project was completed by 'Works on my Machine', Team 3 of CSE 210 at UC San Diego in Fall of 2023. The website is hosted here: https://fediblend.netlify.app/
 
+[Video Showcase](https://www.youtube.com/watch?v=UkW-vXXCAt4)
+
 ## Team Members
 - Eric Zhang
 - Jackson Conte
